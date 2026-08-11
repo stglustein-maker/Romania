@@ -305,6 +305,16 @@
   .res-item .v { font-weight: 700; }
   .maplink { font-size: 0.8rem; text-decoration: none; font-weight: 700; }
 
+  .map-embed-wrap {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    aspect-ratio: 4 / 3;
+  }
+  .map-embed-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+  @media (min-width: 560px) { .map-embed-wrap { aspect-ratio: 16 / 9; } }
+
   .flag-box {
     background: var(--rust-soft);
     border: 1px solid var(--rust);
@@ -431,6 +441,18 @@
     </section>
   </main>
 
+  <main class="view" data-view="map">
+    <section class="block">
+      <p class="eyebrow" data-t="mapEyebrow">The whole route</p>
+      <h2 data-t="mapTitle">Route map</h2>
+      <p class="lede" data-t="mapLede">All 7 stops, in order, pinned on Google Maps.</p>
+      <div class="map-embed-wrap">
+        <iframe id="routeMapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Route map"></iframe>
+      </div>
+      <a id="routeMapLink" class="maplink" target="_blank" rel="noopener" data-t="mapOpenFull">Open full route in Google Maps ↗</a>
+    </section>
+  </main>
+
   <main class="view" data-view="flights">
     <section class="block">
       <p class="eyebrow" data-t="flightsEyebrow">Getting there and back</p>
@@ -484,6 +506,11 @@
     navHome: { en: "Home", he: "בית" },
     navFlights: { en: "Flights", he: "טיסות" },
     navPacking: { en: "Packing", he: "ציוד" },
+    navMap: { en: "Map", he: "מפה" },
+    mapEyebrow: { en: "The whole route", he: "כל המסלול" },
+    mapTitle: { en: "Route map", he: "מפת המסלול" },
+    mapLede: { en: "All 7 stops, in order, pinned on Google Maps.", he: "כל 7 התחנות, בסדר, מסומנות במפות גוגל." },
+    mapOpenFull: { en: "Open full route in Google Maps ↗", he: "פתיחת המסלול המלא במפות גוגל ↖" },
     homeEyebrow: { en: "Day by day", he: "יום אחרי יום" },
     homeTitle: { en: "19 of us, 7 stops, 18 days", he: "19 נוסעים, 7 תחנות, 18 ימים" },
     homeLede: { en: "Tap a day to jump straight to that stop — reservation details, hikes by difficulty, restaurants, and family activities nearby.", he: "לחצו על יום כדי לקפוץ ישר לתחנה — פרטי הזמנה, טיולים לפי רמת קושי, מסעדות ופעילויות משפחתיות בסביבה." },
@@ -866,6 +893,7 @@
   /* ============ RENDER ============ */
   var tabDefs = [
     { id: "home", labelKey: "navHome" },
+    { id: "map", labelKey: "navMap" },
     { id: "flights", labelKey: "navFlights" },
     { id: "packing", labelKey: "navPacking" }
   ];
@@ -1172,6 +1200,13 @@
     });
   }
 
+  function renderRouteMap() {
+    var path = stops.map(function (s) { return encodeURIComponent(s.address); }).join("/");
+    var fullLink = "https://www.google.com/maps/dir/" + path;
+    document.getElementById("routeMapFrame").src = fullLink + "?output=embed";
+    document.getElementById("routeMapLink").href = fullLink;
+  }
+
   function renderAll() {
     renderStaticText();
     renderTabs();
@@ -1180,6 +1215,7 @@
     renderFlights();
     renderPreflight();
     renderPackSelect();
+    renderRouteMap();
   }
 
   document.getElementById("langToggle").addEventListener("click", function () {
