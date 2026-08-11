@@ -1,0 +1,1271 @@
+<title>Yudke Family — Romania 2026</title>
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  :root {
+    --paper: #EEF0E7;
+    --paper-raised: #FBFBF6;
+    --ink: #1B2420;
+    --ink-soft: #4B554E;
+    --ink-faint: #7C8579;
+    --forest: #2F4B3C;
+    --forest-soft: #E1EAE1;
+    --rust: #A0502D;
+    --rust-soft: #F3E2D8;
+    --plum: #6B2F44;
+    --plum-soft: #F0E1E6;
+    --border: #D7D9C9;
+    --shadow: rgba(27, 36, 32, 0.10);
+    --focus: #2F4B3C;
+    --danger: #A23B2E;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12160F;
+      --paper-raised: #1C221A;
+      --ink: #E9ECE3;
+      --ink-soft: #AAB4A4;
+      --ink-faint: #77816F;
+      --forest: #86C4A0;
+      --forest-soft: #223129;
+      --rust: #E0895D;
+      --rust-soft: #3A2A1F;
+      --plum: #D18AA1;
+      --plum-soft: #3A2530;
+      --border: #333B30;
+      --shadow: rgba(0, 0, 0, 0.45);
+      --focus: #86C4A0;
+      --danger: #E38879;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #12160F;
+    --paper-raised: #1C221A;
+    --ink: #E9ECE3;
+    --ink-soft: #AAB4A4;
+    --ink-faint: #77816F;
+    --forest: #86C4A0;
+    --forest-soft: #223129;
+    --rust: #E0895D;
+    --rust-soft: #3A2A1F;
+    --plum: #D18AA1;
+    --plum-soft: #3A2530;
+    --border: #333B30;
+    --shadow: rgba(0, 0, 0, 0.45);
+    --focus: #86C4A0;
+    --danger: #E38879;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Roboto, "Noto Sans Hebrew", "Noto Sans", Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  [dir="rtl"] body { font-family: "Segoe UI", Arial, "Noto Sans Hebrew", -apple-system, sans-serif; }
+
+  h1, h2, h3, h4 { text-wrap: balance; font-weight: 800; letter-spacing: -0.01em; margin: 0; }
+  p { margin: 0; }
+  button, input { font-family: inherit; }
+  a { color: var(--forest); }
+
+  .num { font-variant-numeric: tabular-nums; }
+  .code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    font-weight: 700;
+  }
+  [dir="rtl"] .eyebrow { letter-spacing: 0; }
+
+  /* ---------- password gate ---------- */
+  #gate {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .gate-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 36px 32px;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 12px 32px var(--shadow);
+    text-align: center;
+  }
+  .gate-mark { font-size: 2.2rem; margin-bottom: 6px; }
+  .gate-card h1 { font-size: 1.3rem; margin-bottom: 4px; }
+  .gate-card p.sub { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 20px; }
+  #gate input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  #gate input:focus, button:focus-visible, .tab:focus-visible, select:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  #gate button, .btn-primary {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 9px;
+    border: none;
+    background: var(--forest);
+    color: var(--paper-raised);
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  #gate-error { color: var(--danger); font-size: 0.85rem; min-height: 1.2em; margin-top: 8px; }
+
+  /* ---------- app shell ---------- */
+  #app { display: none; max-width: 900px; margin: 0 auto; padding-bottom: 60px; }
+  #app.visible { display: block; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 18px 0;
+  }
+  .top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .brand { display: flex; align-items: baseline; gap: 8px; }
+  .brand .mark { font-size: 1.4rem; }
+  .brand h1 { font-size: 1.15rem; }
+  .brand .dates { color: var(--ink-faint); font-size: 0.78rem; }
+
+  #langToggle, #downloadBtn {
+    border: 1px solid var(--border);
+    background: var(--paper-raised);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .top-row .actions { display: flex; gap: 8px; align-items: center; }
+
+  nav.tabs {
+    display: flex; gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    -ms-overflow-style: none; scrollbar-width: none;
+  }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: none;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 9px 14px;
+    border-radius: 999px 999px 0 0;
+    font-size: 0.86rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+  }
+  .tab.active { color: var(--forest); border-bottom-color: var(--forest); }
+
+  main.view { padding: 20px 18px 10px; display: none; }
+  main.view.active { display: block; }
+
+  section.block { margin-bottom: 30px; }
+  section.block h2 { font-size: 1.15rem; margin-bottom: 4px; }
+  .lede { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 14px; }
+
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+
+  /* checklist */
+  ul.check { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  ul.check li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 9px 4px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  ul.check li:last-child { border-bottom: none; }
+  ul.check input[type="checkbox"] { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--forest); flex: none; }
+  ul.check label { cursor: pointer; }
+  ul.check .item-note { color: var(--ink-faint); font-size: 0.8rem; display: block; }
+
+  /* people */
+  .fam-group { margin-bottom: 18px; }
+  .fam-group h3 { font-size: 0.95rem; color: var(--forest); margin-bottom: 8px; }
+  .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+  .person {
+    background: var(--paper-raised);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.86rem;
+  }
+  .person .age { color: var(--ink-faint); }
+
+  /* flights */
+  .flight-row {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .flight-row:last-child { border-bottom: none; }
+  .flight-route { font-weight: 800; font-size: 1rem; }
+  .flight-meta { color: var(--ink-soft); font-size: 0.82rem; }
+  .flight-who { font-size: 0.82rem; color: var(--ink-faint); max-width: 46%; text-align: end; }
+
+  /* itinerary stop cards */
+  .stop {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--paper-raised);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .stop-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px;
+    cursor: pointer;
+    gap: 10px;
+  }
+  .stop-num {
+    font-size: 0.72rem; font-weight: 800; color: var(--forest);
+    background: var(--forest-soft);
+    border-radius: 999px;
+    padding: 3px 9px;
+    flex: none;
+  }
+  .stop-title { flex: 1; }
+  .stop-title .prop { font-weight: 800; font-size: 1rem; }
+  .stop-title .loc { color: var(--ink-soft); font-size: 0.82rem; }
+  .stop-dates { text-align: end; font-size: 0.82rem; color: var(--ink-soft); flex: none; }
+  .chev { transition: transform 0.15s; color: var(--ink-faint); flex: none; }
+  .stop.open .chev { transform: rotate(90deg); }
+  [dir="rtl"] .chev { transform: rotate(180deg); }
+  [dir="rtl"] .stop.open .chev { transform: rotate(90deg); }
+
+  .stop-body { display: none; padding: 0 16px 18px; border-top: 1px dashed var(--border); }
+  .stop.open .stop-body { display: block; padding-top: 14px; }
+
+  /* calendar */
+  .cal-wrap { margin: 4px 0 24px; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-dow {
+    text-align: center; font-size: 0.66rem; font-weight: 700;
+    color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em;
+    padding-bottom: 4px;
+  }
+  [dir="rtl"] .cal-dow { letter-spacing: 0; }
+  .cal-cell {
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 2px;
+    text-align: center;
+  }
+  .cal-cell.pad { color: var(--ink-faint); opacity: 0.35; }
+  .cal-cell.trip { color: #fff; cursor: pointer; font-weight: 700; }
+  .cal-cell.trip.departure { background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0 6px, transparent 6px 12px); }
+  .cal-cell.trip:hover { filter: brightness(1.08); }
+  .cal-cell.trip:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .cal-cell .cal-day { font-size: 0.8rem; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .cal-cell .cal-loc { font-size: 0.56rem; line-height: 1.05; margin-top: 1px; opacity: 0.95; }
+
+  .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .res-item { font-size: 0.82rem; }
+  .res-item .k { color: var(--ink-faint); display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  [dir="rtl"] .res-item .k { letter-spacing: 0; }
+  .res-item .v { font-weight: 700; }
+  .maplink { font-size: 0.8rem; text-decoration: none; font-weight: 700; }
+
+  .flag-box {
+    background: var(--rust-soft);
+    border: 1px solid var(--rust);
+    color: var(--ink);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    margin-bottom: 14px;
+  }
+  .flag-box strong { color: var(--rust); }
+
+  .subtabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+  .subtab {
+    border: 1px solid var(--border);
+    background: var(--paper);
+    color: var(--ink-soft);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .subtab.active { background: var(--forest); border-color: var(--forest); color: var(--paper-raised); }
+  .subpanel { display: none; }
+  .subpanel.active { display: block; }
+
+  .pill {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 5px;
+    padding: 2px 7px;
+    margin-inline-end: 8px;
+  }
+  [dir="rtl"] .pill { letter-spacing: 0; }
+  .pill.easy { background: var(--forest-soft); color: var(--forest); }
+  .pill.medium { background: var(--rust-soft); color: var(--rust); }
+  .pill.hard { background: var(--plum-soft); color: var(--plum); }
+
+  .reco { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .reco:last-child { border-bottom: none; }
+  .reco .name { font-weight: 700; font-size: 0.92rem; }
+  .reco .name a, .prop-link { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .reco .name a:hover, .prop-link:hover { border-bottom-style: solid; }
+  .reco .meta { color: var(--ink-faint); font-size: 0.76rem; margin: 2px 0 4px; }
+  .reco .desc { font-size: 0.85rem; color: var(--ink-soft); }
+  .diff-group { margin-bottom: 6px; }
+
+  /* packing */
+  #packSelect {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: var(--paper-raised);
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .pack-person { margin-bottom: 16px; }
+  .pack-person h4 { font-size: 0.88rem; margin-bottom: 6px; }
+  .pack-person .age-tag { color: var(--ink-faint); font-weight: 400; font-size: 0.8rem; }
+
+  .note-block {
+    background: var(--forest-soft);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.84rem;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  footer.admin {
+    max-width: 900px; margin: 0 auto; padding: 0 18px 40px;
+    color: var(--ink-faint); font-size: 0.8rem;
+  }
+  footer.admin .card { font-size: 0.82rem; }
+
+  @media (max-width: 480px) {
+    .flight-who { max-width: 100%; text-align: start; }
+    .flight-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
+</style>
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-mark">🏔️</div>
+    <h1 data-t="gateTitle">Yudke Family — Romania 2026</h1>
+    <p class="sub" data-t="gateSub">Enter the family password to continue</p>
+    <input type="password" id="gateInput" autocomplete="off" data-t-ph="gatePh" />
+    <div id="gate-error"></div>
+    <button id="gateBtn" data-t="gateBtn">Enter</button>
+  </div>
+</div>
+
+<div id="app">
+  <header class="top">
+    <div class="top-row">
+      <div class="brand">
+        <span class="mark">🏔️</span>
+        <div>
+          <h1 data-t="brand">Yudke Family — Romania</h1>
+          <div class="dates">17.08 – 03.09.2026</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="langToggle">עברית</button>
+        <button id="downloadBtn" style="display:none;" data-t="downloadBtn">Download</button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+  </header>
+
+  <main class="view active" data-view="home">
+    <section class="block">
+      <p class="eyebrow" data-t="homeEyebrow">Day by day</p>
+      <h2 data-t="homeTitle">19 of us, 7 stops, 18 days</h2>
+      <p class="lede" data-t="homeLede">Tap a day to jump straight to that stop — reservation details, hikes by difficulty, restaurants, and family activities nearby.</p>
+      <div id="calendar"></div>
+      <div id="stopsList"></div>
+    </section>
+  </main>
+
+  <main class="view" data-view="flights">
+    <section class="block">
+      <p class="eyebrow" data-t="flightsEyebrow">Getting there and back</p>
+      <h2 data-t="flightsTitle">Flights</h2>
+      <div class="card" id="flightsCard"></div>
+    </section>
+
+    <section class="block">
+      <h2 data-t="preflightTitle">Before you fly</h2>
+      <p class="lede" data-t="preflightLede">Handle these before Aug 17.</p>
+      <div class="card">
+        <ul class="check" id="preflightList"></ul>
+      </div>
+    </section>
+  </main>
+
+  <main class="view" data-view="packing">
+    <section class="block">
+      <p class="eyebrow" data-t="packEyebrow">Pack smart</p>
+      <h2 data-t="packTitle">Packing list</h2>
+      <p class="lede" data-t="packLede">Pick a family below — the list adjusts to who's actually in it.</p>
+      <div class="note-block" data-t="weatherNote">
+        Weather note: hot on arrival in Bucharest (up to 34°C), warm days everywhere else (22–27°C), but nights drop to 8–14°C — and Bâlea Lake / the Rodna mountains can be as cold as 9°C with wind, even in August. Maramureș (Aug 20–25) has the highest rain risk of the trip.
+      </div>
+      <select id="packSelect"></select>
+      <div id="packResult"></div>
+    </section>
+  </main>
+
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var SITE_PASSWORD = "romania13";
+
+  /* ============ TRANSLATIONS (static UI strings) ============ */
+  var T = {
+    gateTitle: { en: "Yudke Family — Romania 2026", he: "משפחת יודקה — רומניה 2026" },
+    gateSub: { en: "Enter the family password to continue", he: "הזינו את סיסמת המשפחה כדי להמשיך" },
+    gatePh: { en: "Password", he: "סיסמה" },
+    gateBtn: { en: "Enter", he: "כניסה" },
+    gateWrong: { en: "That's not it — try again.", he: "לא נכון — נסו שוב." },
+    calFlightHome: { en: "Flight home", he: "טיסה הביתה" },
+    downloadBtn: { en: "⬇ Save file", he: "⬇ שמירת קובץ" },
+    downloadHint: { en: "Saved. Send this file (not a link) to family — they can open it in any browser, no account needed.", he: "נשמר. שלחו את הקובץ הזה (לא קישור) למשפחה — הן יכולות לפתוח אותו בכל דפדפן, בלי צורך בחשבון." },
+    downloadFail: { en: "Couldn't save the file on this device. Try again, or ask Esti.", he: "לא הצלחנו לשמור את הקובץ במכשיר הזה. נסו שוב, או פנו לאסתי." },
+    brand: { en: "Yudke Family — Romania", he: "משפחת יודקה — רומניה" },
+    navHome: { en: "Home", he: "בית" },
+    navFlights: { en: "Flights", he: "טיסות" },
+    navPacking: { en: "Packing", he: "ציוד" },
+    homeEyebrow: { en: "Day by day", he: "יום אחרי יום" },
+    homeTitle: { en: "19 of us, 7 stops, 18 days", he: "19 נוסעים, 7 תחנות, 18 ימים" },
+    homeLede: { en: "Tap a day to jump straight to that stop — reservation details, hikes by difficulty, restaurants, and family activities nearby.", he: "לחצו על יום כדי לקפוץ ישר לתחנה — פרטי הזמנה, טיולים לפי רמת קושי, מסעדות ופעילויות משפחתיות בסביבה." },
+    preflightTitle: { en: "Before you fly", he: "לפני הטיסה" },
+    preflightLede: { en: "Handle these before Aug 17.", he: "לטפל בזה לפני ה-17 באוגוסט." },
+    flightsEyebrow: { en: "Getting there and back", he: "הלוך ושוב" },
+    flightsTitle: { en: "Flights", he: "טיסות" },
+    packEyebrow: { en: "Pack smart", he: "אריזה חכמה" },
+    packTitle: { en: "Packing list", he: "רשימת ציוד" },
+    packLede: { en: "Pick a family below — the list adjusts to who's actually in it.", he: "בחרו משפחה למטה — הרשימה מתאימה את עצמה למי שבה." },
+    weatherNote: { en: "Weather note: hot on arrival in Bucharest (up to 34°C), warm days everywhere else (22–27°C), but nights drop to 8–14°C — and Bâlea Lake / the Rodna mountains can be as cold as 9°C with wind, even in August. Maramureș (Aug 20–25) has the highest rain risk of the trip.", he: "לגבי מזג האוויר: חם עם הנחיתה בבוקרשט (עד 34°), ימים חמים בכל שאר התחנות (22–27°), אבל הלילות יורדים ל-8–14°, ובאגם בלאה / הרי רודנה יכול להיות קר עד 9° עם רוח, גם באוגוסט. במרמורש (20–25.8) יש את הסיכוי הגבוה ביותר לגשם בטיול." },
+    stopNum: { en: "Stop", he: "תחנה" },
+    checkIn: { en: "Check-in", he: "צ'ק-אין" },
+    checkOut: { en: "Check-out", he: "צ'ק-אאוט" },
+    phone: { en: "Phone", he: "טלפון" },
+    booking: { en: "Booking #", he: 'מס\' הזמנה' },
+    pin: { en: "PIN", he: "קוד PIN" },
+    rooms: { en: "Rooms", he: "חדרים" },
+    pending: { en: "pending", he: "בהמתנה" },
+    mapLink: { en: "Open in Maps →", he: "פתיחה במפות ←" },
+    tabHikes: { en: "Hikes", he: "טיולים רגליים" },
+    tabRestaurants: { en: "Restaurants", he: "מסעדות" },
+    tabActivities: { en: "Activities", he: "פעילויות" },
+    diffEasy: { en: "Easy", he: "קל" },
+    diffMedium: { en: "Medium", he: "בינוני" },
+    diffHard: { en: "Hard", he: "קשה" },
+    noHikesNote: { en: "No hikes here — this stop is about the city and settling in.", he: "אין טיולים בתחנה הזו — כאן מתמקדים בעיר ובמנוחה." },
+    sharedGear: { en: "Shared family gear (pack once, not per person)", he: "ציוד משותף למשפחה (פעם אחת, לא לכל אחד)" },
+    packSelectEveryone: { en: "— choose a family —", he: "— בחרו משפחה —" }
+  };
+
+  var lang = localStorage.getItem("yr_lang") || "en";
+
+  function t(key) { return (T[key] && T[key][lang]) || key; }
+  function tf(field) { return field ? (field[lang] || field.en || "") : ""; }
+
+  /* ============ DATA: family ============ */
+  var families = [
+    { id: "seniors", name: { en: "The Yudke Seniors", he: "בני הזוג יודקה הבכירים" },
+      members: [ { name: "Miki", age: 69 }, { name: "Meirke", age: 74 } ] },
+    { id: "dotan", name: { en: "Dotan Yudke", he: "דותן יודקה" },
+      members: [ { name: "Dotan", age: 42 } ] },
+    { id: "okun", name: { en: "The Okun Family", he: "משפחת אוקון" },
+      members: [ { name: "Sarit", age: 46 }, { name: "Maya", age: 17 }, { name: "Netta", age: 16 }, { name: "Noga", age: 14 }, { name: "Ori", age: 11 } ] },
+    { id: "gal", name: { en: "The Gal Family", he: "משפחת גל" },
+      members: [ { name: "Omer", age: 44 }, { name: "Moran", age: 44 }, { name: "Itamar", age: 12 }, { name: "Yoav", age: 10 }, { name: "Adam", age: 8 }, { name: "Yiftach", age: 6 }, { name: "Maayan", age: 3 } ] },
+    { id: "yudke", name: { en: "The Yudke Family (Bar & Esti)", he: "משפחת יודקה (בר ואסתי)" },
+      members: [ { name: "Bar", age: 35 }, { name: "Esti", age: 33 }, { name: "Albi", age: 4 }, { name: "Negev", age: 1.9 } ] }
+  ];
+
+  function ageBand(age) {
+    if (age < 3) return "baby";
+    if (age < 6) return "toddler";
+    if (age < 13) return "kid";
+    if (age < 18) return "teen";
+    if (age < 65) return "adult";
+    return "senior";
+  }
+
+  /* ============ DATA: flights ============ */
+  var flights = {
+    out: [
+      { route: "TLV → OTP", flightNo: "", date: "17.08.2026", dep: "16:45", arr: "19:35", who: { en: "Everyone except Bar's family", he: "כולם חוץ ממשפחת בר" } },
+      { route: "TLV → OTP", flightNo: "LY571", date: "17.08.2026", dep: "18:30", arr: "21:10", who: { en: "Bar, Esti, Albi & Negev", he: "בר, אסתי, אלבי ונגב" } }
+    ],
+    back: [
+      { route: "OTP → TLV", flightNo: "", date: "03.09.2026", dep: "05:45", arr: "08:25", who: { en: "Everyone except Bar's family", he: "כולם חוץ ממשפחת בר" } },
+      { route: "OTP → TLV", flightNo: "", date: "03.09.2026", dep: "08:30", arr: "10:55", who: { en: "Bar, Esti, Albi & Negev", he: "בר, אסתי, אלבי ונגב" } }
+    ]
+  };
+
+  /* ============ DATA: pre-flight checklist ============ */
+  var preflight = [
+    { en: "Passport validity (6+ months)", he: "תוקף דרכון (6+ חודשים)" },
+    { en: "Travel insurance", he: "ביטוח נסיעות" },
+    { en: "International driving license", he: "רישיון נהיגה בינלאומי" },
+    { en: "Reserve train + restaurants", he: "הזמנת רכבת ומסעדות" },
+    { en: "Romanian Lei (cash)", he: "לֵיי רומני (מזומן)" },
+    { en: "EU power adapter", he: "מתאם חשמל אירופי" },
+    { en: "Phone eSIM / roaming", he: "eSIM / נדידה" },
+    { en: "Offline maps", he: "מפות לא מקוונות" },
+    { en: "Medications + prescriptions", he: "תרופות ומרשמים" },
+    { en: "Car seats (if renting)", he: "כיסאות בטיחות (אם שוכרים רכב)" },
+    { en: "Print booking confirmations", he: "הדפסת אישורי הזמנה" },
+    { en: "Check Transfăgărășan road status", he: "בדיקת כביש הטרנספגרשן" }
+  ];
+
+  /* ============ DATA: itinerary stops ============ */
+  function addr(a) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(a); }
+
+  var stops = [
+    {
+      property: { en: "Portobella Airport Aparthotel", he: "פורטובלה אירפורט אפרטהוטל" },
+      bookingLink: "https://www.booking.com/hotel/ro/portobella-airport-residence-aparthotel-otopeni.html",
+      loc: { en: "Otopeni (near Bucharest Airport)", he: "אוטופני (ליד שדה התעופה בוקרשט)" },
+      short: { en: "Bucharest", he: "בוקרשט" },
+      checkIn: "17.08.2026", checkOut: "18.08.2026",
+      address: "Str Drumul Garii Odai nr 2-4-6, Airport Residence bloc 5, Otopeni, 075100, Romania",
+      phone: "+40 733 749 745", booking: "5486276390", pin: "",
+      rooms: { en: "6 rooms", he: "6 חדרים" },
+      notes: { en: "Self check-in — arrival night only, 9 adults + 10 children. There's a door code — check your booking confirmation for it.", he: "צ'ק-אין עצמאי — רק ליל ההגעה, 9 מבוגרים + 10 ילדים. יש קוד לפתיחת הדלת — בדקו באישור ההזמנה." },
+      hikes: null,
+      restaurants: [
+        { name: { en: "Tatu Bar and Grill", he: "טאטו בר אנד גריל" }, meta: { en: "Otopeni, casual", he: "אוטופני, אווירה קז'ואל" }, desc: { en: "Local favorite near the airport — pizza and grilled dishes, easy for a tired group on arrival night.", he: "מקום אהוב על המקומיים ליד השדה — פיצה ומנות על האש, קל לקבוצה עייפה בליל ההגעה." }, link: "https://www.tripadvisor.com/Restaurant_Review-g298476-d8022782-Reviews-Tatu_Bar_Grill-Otopeni_Ilfov_County_Southern_Romania.html" },
+        { name: { en: "Lucky Pizza", he: "לאקי פיצה" }, meta: { en: "Otopeni, casual", he: "אוטופני, קז'ואל" }, desc: { en: "Straightforward pizza and pasta — a safe bet for kids after a long flight.", he: "פיצה ופסטה פשוטות — בחירה בטוחה לילדים אחרי טיסה ארוכה." }, link: "https://www.tripadvisor.com/Restaurant_Review-g298476-d12142998-Reviews-Lucky_Pizza-Otopeni_Ilfov_County_Southern_Romania.html" }
+      ],
+      activities: []
+    },
+    {
+      property: { en: "OberWood", he: "אוברווד" },
+      bookingLink: "https://www.booking.com/hotel/ro/oberwood.html",
+      loc: { en: "Porumbacu de Sus (Făgăraș Mountains)", he: "פורומבקו דה סוס (הרי פגרש)" },
+      short: { en: "Făgăraș", he: "פגרש" },
+      checkIn: "18.08.2026", checkOut: "20.08.2026",
+      address: "Strada 244, 557192 Porumbacu de Sus, Romania",
+      phone: "+40 744 554 702", booking: "", pin: "",
+      rooms: { en: "5 rooms", he: "5 חדרים" },
+      notes: { en: "9 adults + 10 children.", he: "9 מבוגרים + 10 ילדים." },
+      hikes: {
+        easy: [
+          { name: { en: "Bâlea Lake shoreline loop", he: "טיילת סביב אגם בלאה" }, meta: { en: "~20–30 min flat loop · cable car up", he: "20–30 דק' הליכה שטוחה · רכבל למעלה" }, desc: { en: "A real glacial lake at 2,034m with almost no walking effort — ride the cable car up instead of the hairpin drive.", he: "אגם קרחוני אמיתי בגובה 2,034 מ' כמעט בלי מאמץ הליכה — עולים ברכבל במקום בכביש המפותל." }, link: "https://he.wikipedia.org/wiki/אגם_בליה" },
+          { name: { en: "Porumbacu riverside walk", he: "טיילת לאורך הנהר בפורומבקו" }, meta: { en: "As short/long as you like · starts in the village", he: "קצר או ארוך כרצונכם · מתחיל בכפר" }, desc: { en: "Flat gravel road along the river, right from where you're staying.", he: "דרך חצץ שטוחה לאורך הנהר, ממש ליד מקום הלינה." }, link: "https://www.google.com/maps/search/?api=1&query=Porumbacu+de+Sus%2C+Romania" },
+          { name: { en: "ASTRA open-air museum grounds", he: "שטחי מוזיאון אסטרה הפתוח" }, meta: { en: "~45 min drive · flat paths", he: "כ-45 דק' נסיעה · שבילים שטוחים" }, desc: { en: "250-acre open-air village museum — flat paths, and horse-cart rides if little legs get tired.", he: "מוזיאון כפר פתוח בשטח ענק — שבילים שטוחים, ואפשר טרמפ בעגלת סוסים אם רגליים קטנות מתעייפות." }, link: "https://muzeulastra.ro/en/" }
+        ],
+        medium: [
+          { name: { en: "Șerbota Waterfall", he: "מפל שרבוטה" }, meta: { en: "~3–4 hrs round trip · starts in village", he: "3–4 שעות הלוך ושוב · מתחיל בכפר" }, desc: { en: "One of the most impressive waterfalls in the Carpathians — turn back at the falls.", he: "אחד המפלים המרשימים ביותר בקרפטים — חוזרים אחרי המפל." }, link: "https://www.alltrails.com/trail/romania/sibiu/cabana-barcaciu-v-erbota-cabana-negoiu" },
+          { name: { en: "Bâlea Lac viewpoint walks", he: "טיולי תצפית מאגם בלאה" }, meta: { en: "~1–2 hrs round trip", he: "1–2 שעות הלוך ושוב" }, desc: { en: "Alpine views without a full ridge hike — a good starter mountain walk for teens.", he: "נוף אלפיני בלי טרק רכס מלא — טיול הרים ראשוני טוב לבני נוער." }, link: "https://www.alltrails.com/poi/romania/sibiu/car-i-oara/lacul-balea" }
+        ],
+        hard: [
+          { name: { en: "Cabana Negoiu route", he: "מסלול לקבינת נגויו" }, meta: { en: "~16km, 4–5 hrs one way · 800m gain", he: "כ-16 ק\"מ, 4–5 שעות לכיוון אחד · עלייה של 800 מ'" }, desc: { en: "The classic Făgăraș approach trail, right from the village.", he: "מסלול הגישה הקלאסי להרי פגרש, ישר מהכפר." }, link: "https://www.outdooractive.com/en/route/hiking-trail/transilvania/fagaras-stage-1-porumbacu-de-sus-cabana-negoiu/24229701/" }
+        ]
+      },
+      restaurants: [
+        { name: { en: "Pensiunea Transfagarasan", he: "פנסיונה טרנספגרשן" }, meta: { en: "Cârțișoara, ~15–20 min", he: "קרטישוארה, כ-15–20 דק'" }, desc: { en: "Romanian home cooking with a big garden and a kids' playground.", he: "בישול ביתי רומני, גינה גדולה ומתקן משחקים לילדים." }, link: "https://www.tripadvisor.com/Hotel_Review-g2042467-d6622134-Reviews-Pensiunea_Transfagarasan-Cartisoara_Sibiu_County_Central_Romania_Transylvania.html" },
+        { name: { en: "Popasul Avrig", he: "פופסול אברינג" }, meta: { en: "Avrig, ~10 min", he: "אברינג, כ-10 דק'" }, desc: { en: "A tourist complex since 1992, built to handle large groups.", he: "מתחם תיירותי מ-1992, בנוי לקבוצות גדולות." }, link: "https://popasulavrig.ro/restaurant/" },
+        { name: { en: "Crama Sibiul Vechi", he: "קרמה סיביו וקי" }, meta: { en: "Sibiu old town, ~45 min", he: "העיר העתיקה בסיביו, כ-45 דק'" }, desc: { en: "Atmospheric wine-cellar restaurant — very popular, reserve ahead for 19.", he: "מסעדת מרתף יין אווירתית — פופולרית מאוד, להזמין מראש ל-19 איש." }, link: "https://www.tripadvisor.com/Restaurant_Review-g295393-d1077350-Reviews-Crama_Sibiul_Vechi-Sibiu_Sibiu_County_Central_Romania_Transylvania.html" }
+      ],
+      activities: [
+        { name: { en: "Clay Fairy-Tale Castle", he: "טירת החימר" }, meta: { en: "In the village", he: "בכפר עצמו" }, desc: { en: "A whimsical hand-built clay castle with 10 rooms — right where you're staying.", he: "טירת חימר קסומה בעבודת יד עם 10 חדרים — ממש ליד מקום הלינה." }, link: "https://www.casteluldelut.ro/" },
+        { name: { en: "Bâlea Lake cable car", he: "רכבל אגם בלאה" }, meta: { en: "~45–70 min drive to base", he: "כ-45–70 דק' נסיעה לתחנה" }, desc: { en: "15-minute ride up to a 2,034m glacier lake — no hard walking needed.", he: "רכבל של 15 דקות עד לאגם קרחוני בגובה 2,034 מ' — בלי הליכה מאומצת." }, link: "https://he.wikipedia.org/wiki/אגם_בליה" },
+        { name: { en: "Vidraru Dam + Poenari Castle", he: "סכר וידרארו וטירת פואנרי" }, meta: { en: "~2.5–3 hrs one way, full day", he: "כ-2.5–3 שעות לכיוון אחד, יום שלם" }, desc: { en: "Dramatic dam plus Vlad the Impaler's fortress (1,480 steps) — best as a day trip for the fitter half of the group.", he: "סכר מרשים וטירת ולאד המשפד (1,480 מדרגות) — מומלץ כטיול יום לחלק הכשיר יותר של הקבוצה." }, link: "https://www.tripadvisor.com/AttractionProductReview-g294458-d19806919-Private_tour_to_Poenari_Citadel_Vidraru_Dam_Arges_Monastery-Bucharest.html" },
+        { name: { en: "Sibiu Zoo & Aqua Park", he: "גן החיות ופארק המים בסיביו" }, meta: { en: "~45 min", he: "כ-45 דק'" }, desc: { en: "A cheap, easy pairing for toddlers through teens.", he: "צירוף זול ונוח לפעוטות עד בני נוער." }, link: "https://www.zoosibiu.ro/" }
+      ]
+    },
+    {
+      property: { en: "Cabana La Poarta Codrului", he: "כבנה לה פורטה קודרולוי" },
+      bookingLink: "https://www.booking.com/hotel/ro/cabana-la-poarta-codrului.html",
+      loc: { en: "Moisei (Maramureș / Rodna Mountains)", he: "מויסיי (מרמורש / הרי רודנה)" },
+      short: { en: "Moisei", he: "מויסיי" },
+      checkIn: "20.08.2026", checkOut: "25.08.2026",
+      address: "Strada Izvorul Dragoș 644c, Moisei, 437195, Romania",
+      phone: "+40 757 355 752", booking: "5653911811", pin: "3160",
+      rooms: { en: "2 houses", he: "2 בתים" },
+      notes: { en: "The longest stay of the trip — 9 adults + 10 children.", he: "השהות הארוכה בטיול — 9 מבוגרים + 10 ילדים." },
+      hikes: {
+        easy: [
+          { name: { en: "Runcu Știol plateau", he: "רמת רונקו שטיול" }, meta: { en: "Flat, 20–40 min at the top · Borșa cable car", he: "שטוח, 20–40 דק' למעלה · רכבל בורשה" }, desc: { en: "Ride the Borșa cable car up, then a flat stroll around a mountain lake — zero climbing.", he: "עולים ברכבל בורשה ואז מטיילים בשטח שטוח סביב אגם הררי — בלי טיפוס." }, link: "https://www.outdooractive.com/en/poi/maramures/telescaun-partia-de-schi-runc-stiol-cascada-cailor/63828671/" },
+          { name: { en: "Cascada Cailor via chairlift", he: "מפל הסוסים דרך המעלית" }, meta: { en: "~30 min gentle walk after the lift", he: "כ-30 דק' הליכה קלה אחרי המעלית" }, desc: { en: "Take the chairlift up, then an easy downhill path to Romania's tallest waterfall (90m).", he: "עולים בכיסא הרמה ואז שביל קל יורד עד המפל הגבוה ברומניה (90 מ')." }, link: "https://www.lametayel.co.il/tips/dvkm0n" },
+          { name: { en: "Moisei Monastery grounds", he: "שטחי מנזר מויסיי" }, meta: { en: "10–20 min · in town", he: "10–20 דק' · בעיר" }, desc: { en: "A historic wooden monastery from 1600, right in town — good for a short breather.", he: "מנזר עץ היסטורי משנת 1600, ממש בעיר — טוב להפסקה קצרה." }, link: "https://ro.wikipedia.org/wiki/M%C4%83n%C4%83stirea_Moisei" }
+        ],
+        medium: [
+          { name: { en: "Cascada Cailor — full hike", he: "מפל הסוסים — מסלול מלא" }, meta: { en: "~5–6km round trip, 2–3 hrs, 380m gain", he: "5–6 ק\"מ הלוך ושוב, 2–3 שעות, עלייה 380 מ'" }, desc: { en: "Forest trail to the 90m waterfall — real effort, manageable for kids 8+.", he: "מסלול יער עד המפל בגובה 90 מ' — מאמץ אמיתי, מתאים לילדים מגיל 8." }, link: "https://www.lametayel.co.il/tips/dvkm0n" },
+          { name: { en: "Iezer Lake (turnaround)", he: "אגם איזר (חזרה מהאגם)" }, meta: { en: "~16km round trip, 5–6 hrs", he: "16 ק\"מ הלוך ושוב, 5–6 שעות" }, desc: { en: "A glacial lake at 1,800m — go as far as the lake and turn back while stronger hikers push to the summit.", he: "אגם קרחוני בגובה 1,800 מ' — הולכים עד האגם וחוזרים, בעוד המטיילים החזקים ממשיכים לפסגה." }, link: "https://www.outdooractive.ro/ro/poi/maramures/lacul-iezer-iezerul-pietrosului-/62156665/" }
+        ],
+        hard: [
+          { name: { en: "Pietrosul Rodnei Peak (2,303m)", he: "פסגת פייטרוסול רודנה (2,303 מ')" }, meta: { en: "~16km round trip, 7.5–10 hrs", he: "16 ק\"מ הלוך ושוב, 7.5–10 שעות" }, desc: { en: "The highest peak of the Rodna Mountains — a real full-day mountain day.", he: "הפסגה הגבוהה בהרי רודנה — יום הרים מלא ואמיתי." }, link: "https://www.alltrails.com/trail/romania/maramures/pietrosul-rodnei" }
+        ]
+      },
+      restaurants: [
+        { name: { en: "Gura Repezii", he: "גורה רפזי" }, meta: { en: "Borșa, ~15 min", he: "בורשה, כ-15 דק'" }, desc: { en: "Trout farm restaurant with a lakeside terrace, pedal boats and a kids' playground — dinner that doubles as an activity.", he: "מסעדת חוות דגי פורל עם מרפסת ליד האגם, סירות דיווש ומתקן משחקים — ארוחת ערב שהיא גם פעילות." }, link: "https://complexpescarescgurarepezii.ro/en/" },
+        { name: { en: "La Cassa", he: "לה קאסה" }, meta: { en: "Vișeu de Sus, ~19 min", he: "ויסאו דה סוס, כ-19 דק'" }, desc: { en: "Locals' top pick — Romanian and international, indoor and outdoor seating.", he: "המקום המועדף על המקומיים — רומני ובינלאומי, ישיבה בפנים ובחוץ." }, link: "https://www.tripadvisor.com/Restaurant_Review-g1644830-d14801921-Reviews-La_Cassa-Viseu_de_Sus_Maramures_County_Northwest_Romania_Transylvania.html" },
+        { name: { en: "Restaurant Royal", he: "רסטורן רויאל" }, meta: { en: "Borșa, ~13 min", he: "בורשה, כ-13 דק'" }, desc: { en: "Ranked #1 in Borșa — traditional Romanian, known for soups and steaks.", he: "המדורג הראשון בבורשה — רומני מסורתי, ידוע במרקים ובסטייקים." }, link: "https://www.tripadvisor.com/Restaurant_Review-g2554398-d13388589-Reviews-Restaurant_Royal-Borsa_Maramures_County_Northwest_Romania_Transylvania.html" }
+      ],
+      activities: [
+        { name: { en: "Mocănița steam train", he: "רכבת הקיטור מוצ'ניצה" }, meta: { en: "Vișeu de Sus, ~20 min · book ahead", he: "ויסאו דה סוס, כ-20 דק' · להזמין מראש" }, desc: { en: "A historic narrow-gauge forestry train up the Vaser Valley — full round trip ~6 hours. Sells out, book online.", he: "רכבת יער היסטורית צרת מסילה בעמק ואסר — סיבוב מלא כ-6 שעות. נגמר מהר, להזמין באינטרנט מראש." }, link: "https://www.lametayel.co.il/pois/q2dvn" },
+        { name: { en: "Merry Cemetery, Săpânța", he: "בית הקברות העליז, סאפנצה" }, meta: { en: "~1h45–2h, full day trip", he: "כ-1:45–2 שעות, טיול יום שלם" }, desc: { en: "Famous colorful, hand-carved grave crosses — combine with Sighetu Marmației on the way.", he: "צלבי קבר צבעוניים ומעוצבים בעבודת יד — לשלב עם סיגטו מרמציאיי בדרך." }, link: "https://en.wikipedia.org/wiki/Merry_Cemetery" },
+        { name: { en: "Bârsana Monastery (UNESCO)", he: "מנזר ברסנה (אונסק\"ו)" }, meta: { en: "~49 min", he: "כ-49 דק'" }, desc: { en: "The most visually spectacular of the wooden church complexes — easy walking grounds, craft stalls.", he: "המרשים ביותר מבין מתחמי כנסיות העץ — שטח הליכה נוח, דוכני מלאכת יד." }, link: "https://www.lametayel.co.il/pois/q29gl" },
+        { name: { en: "Telegondola Borșa cable car", he: "רכבל בורשה" }, meta: { en: "~15–20 min", he: "כ-15–20 דק'" }, desc: { en: "Year-round gondola, easy mountain views for grandparents and toddlers alike.", he: "רכבל פעיל כל השנה, נוף הררי נוח לסבים וסבתות ולפעוטות כאחד." }, link: "https://skiborsa.eu/telegondola-borsa/" }
+      ]
+    },
+    {
+      property: { en: "Casa Roland", he: "קאסה רולנד" },
+      bookingLink: "https://www.booking.com/hotel/ro/casa-roland.html",
+      loc: { en: "Sovata", he: "סובאטה" },
+      short: { en: "Sovata", he: "סובאטה" },
+      checkIn: "25.08.2026", checkOut: "27.08.2026",
+      address: "Strada Stâna de Vale 10A, Sovata, Romania",
+      phone: "+40 786 602 470", booking: "6017019602", pin: "2401",
+      rooms: { en: "1 house", he: "בית אחד" },
+      notes: { en: "9 adults + 9 children.", he: "9 מבוגרים + 9 ילדים." },
+      hikes: {
+        easy: [
+          { name: { en: "Lacul Ursu loop", he: "טיילת אגם אורסו" }, meta: { en: "~2km, 30–40 min · in town", he: "כ-2 ק\"מ, 30–40 דק' · בעיר" }, desc: { en: "Flat paved loop around the salt lake — the easiest option for the whole group.", he: "טיילת שטוחה סביב אגם המלח — האפשרות הקלה ביותר לכל הקבוצה." }, link: "https://www.alltrails.com/trail/romania/mures/sovata-tivoli-lacul-ursu" },
+          { name: { en: "Tivoli Lake walk", he: "טיילת אגם טיבולי" }, meta: { en: "~1–1.5 mi loop, ~30 min", he: "כ-1.5–2.5 ק\"מ, כ-30 דק'" }, desc: { en: "A calmer freshwater lake near the adventure park — good for a picnic.", he: "אגם מים מתוקים שקט יותר, ליד פארק ההרפתקאות — טוב לפיקניק." }, link: "https://visitmures.com/en/sovata/outdoor/hiking-and-trails/tourist-alley-tivoli-sovata" }
+        ],
+        medium: [
+          { name: { en: "Creasta Stejarului ridge loop", he: "מסלול רכס קרסטה סטיז'רולוי" }, meta: { en: "~7.7km, 2.5–3 hrs, ~310m gain", he: "כ-7.7 ק\"מ, 2.5–3 שעות, עלייה כ-310 מ'" }, desc: { en: "A wooded ridge loop above town — for teens and fit adults, too long for toddlers.", he: "מסלול רכס מיוער מעל העיר — לבני נוער ומבוגרים כשירים, ארוך מדי לפעוטות." }, link: "https://www.alltrails.com/trail/romania/mures/sovata-gara-mica-creasta-stejarului-sovata-centru" }
+        ],
+        hard: [
+          { name: { en: "Vârful Saca Mare (1,776m)", he: "פסגת סאקה מארה (1,776 מ')" }, meta: { en: "Full-day mountain hike, ~20–25 min to trailhead", he: "טיול הרים ליום שלם, כ-20–25 דק' לתחילת המסלול" }, desc: { en: "The highest peak of the Gurghiu Mountains — for fit adults/teens only.", he: "הפסגה הגבוהה בהרי גורגיו — למבוגרים ובני נוער כשירים בלבד." }, link: "https://www.alltrails.com/trail/romania/mures/sovata-centru-valea-sebe-ului-vf-saca-mare" }
+        ]
+      },
+      restaurants: [
+        { name: { en: "Hanul Pescăresc", he: "האנול פסקרסק" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "Fish/trout restaurant with a big garden, creek and a kids' play area — one reviewer brought 6 families.", he: "מסעדת דגים עם גינה גדולה, נחל ומתקן משחקים לילדים — מבקר אחד הביא 6 משפחות." }, link: "https://pastravariasovata.ro/" },
+        { name: { en: "Bello Pizza & Grill", he: "בלו פיצה אנד גריל" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "Top-rated locally — the safest option if picky eaters need pizza or pasta.", he: "המדורג הכי גבוה מקומית — הבחירה הבטוחה ביותר לאוכלנים בררנים." }, link: "https://bellofood.ro/" },
+        { name: { en: "Ensana Sovata hotel buffet", he: "מזנון מלון אנסנה סובאטה" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "Buffet-style, handles a group of 19 with mixed ages and diets easily.", he: "בסגנון מזנון, מתמודד בקלות עם קבוצה של 19 איש עם גילאים ותפריטים מגוונים." }, link: "https://ensanahotels.com/en/hotels/sovata" }
+      ],
+      activities: [
+        { name: { en: "Lacul Ursu salt lake", he: "אגם המלח אורסו" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "The world's largest heliothermal salt lake — surface water up to 35°C, floats you effortlessly. Works for every age.", he: "אגם המלח ההליותרמי הגדול בעולם — מים חמים עד 35° בשכבה העליונה, מרחפים בלי מאמץ. מתאים לכל גיל." }, link: "https://www.lametayel.co.il/tips/n827jv" },
+        { name: { en: "Aqua Beach Praid", he: "אקווה ביץ' פראיד" }, meta: { en: "~10–15 min", he: "כ-10–15 דק'" }, desc: { en: "An open water park — the good substitute now that the Praid salt mine is closed. Mini aqua park for kids, heated pools.", he: "פארק מים פתוח — התחליף הטוב עכשיו כשמכרה המלח בפראיד סגור. פארק מים מיני לילדים, בריכות מחוממות." }, link: "https://visit-praid.ro/directorie/aqua-beach/" },
+        { name: { en: "Corund pottery village", he: "כפר הקרמיקה קורונד" }, meta: { en: "~20–25 min", he: "כ-20–25 דק'" }, desc: { en: "Pottery-painting and craft activities — a good easy half-day stop.", he: "צביעת קרמיקה ופעילויות מלאכת יד — חצי יום קל ונעים." }, link: "https://visitharghita.com/en/places/corund-pottery-rh99p3rpf5tjxa" }
+      ],
+      flags: [ { en: "Salina Praid (the underground salt mine) has been closed since a 2025 flood, with no confirmed reopening date. Aqua Beach Praid (above) is the open substitute.", he: "מכרה המלח פראיד (סלינה פראיד) סגור מאז שיטפון ב-2025, ללא תאריך פתיחה ידוע. אקווה ביץ' פראיד (למעלה) הוא התחליף הפתוח." } ]
+    },
+    {
+      property: { en: "Pensiunea Casa Bono", he: "פנסיונה קאסה בונו" },
+      bookingLink: "https://www.booking.com/hotel/ro/pensiunea-casa-bono.html",
+      loc: { en: "Brașov", he: "בראשוב" },
+      short: { en: "Brașov", he: "בראשוב" },
+      checkIn: "27.08.2026", checkOut: "30.08.2026",
+      address: "23b Strada Neagoe Basarab, Brașov, 500002, Romania",
+      phone: "+40 749 665 573", booking: "6248282262", pin: "6121",
+      rooms: { en: "6 rooms", he: "6 חדרים" },
+      notes: { en: "9 adults + 10 children.", he: "9 מבוגרים + 10 ילדים." },
+      hikes: {
+        easy: [
+          { name: { en: "Tâmpa Mountain cable car", he: "רכבל הר טמפה" }, meta: { en: "2–3 min ride · base is at the old town's edge", he: "2–3 דק' נסיעה · התחנה בקצה העיר העתיקה" }, desc: { en: "Reach the 955m summit and the Brașov hillside sign with zero climbing.", he: "מגיעים לפסגה בגובה 955 מ' ולשלט \"בראשוב\" בלי לטפס בכלל." }, link: "https://www.tripadvisor.com/Attraction_Review-g295394-d3167189-Reviews-Tampa_Cable_Car-Brasov_Brasov_County_Central_Romania_Transylvania.html" },
+          { name: { en: "Poiana Brașov cable cars", he: "הרכבלים בפויאנה בראשוב" }, meta: { en: "8-min ride to ~1,775m · ~15–20 min drive", he: "8 דק' נסיעה עד 1,775 מ' · כ-15–20 דק' נסיעה" }, desc: { en: "Panoramic views and flat walking loops at the top — great for every age.", he: "נוף פנורמי ומסלולי הליכה שטוחים למעלה — מצוין לכל גיל." }, link: "https://brasovtourism.app/en/places/telegondola-postavarul-expres-iyodciwlrqycdq" }
+        ],
+        medium: [
+          { name: { en: "Tâmpa Mountain on foot", he: "הר טמפה ברגל" }, meta: { en: "~3km, 1–1.5 hrs up · cable car down", he: "כ-3 ק\"מ, 1–1.5 שעות למעלה · רכבל למטה" }, desc: { en: "Moderate forest trail — go up on foot, ride the cable car down.", he: "מסלול יער בינוני — עולים ברגל, יורדים ברכבל." }, link: "https://www.alltrails.com/trail/romania/brasov/mt-tampa-via-drumul-serpentinelor" },
+          { name: { en: "Zărnești Gorge", he: "קניון זרנשטי" }, meta: { en: "~2–3 hrs round trip · ~30–35 min drive", he: "2–3 שעות הלוך ושוב · כ-30–35 דק' נסיעה" }, desc: { en: "A narrow limestone canyon on a gravel path — the manageable version of Piatra Craiului.", he: "קניון גיר צר על שביל חצץ — הגרסה הנוחה של פייטרה קריולוי." }, link: "https://www.alltrails.com/trail/romania/brasov/prapastiile-zarne-tiului" }
+        ],
+        hard: [
+          { name: { en: "Seven Ladders Canyon", he: "קניון שבע הסולמות" }, meta: { en: "~2h40 total · ~15–20 min drive", he: "כ-2:40 שעות בסך הכל · כ-15–20 דק' נסיעה" }, desc: { en: "Metal ladders past 7 waterfalls — not for kids under 7–8 or anyone uneasy with heights.", he: "סולמות מתכת לצד 7 מפלים — לא לילדים מתחת לגיל 7–8 או למי שחושש מגובה." }, link: "https://www.alltrails.com/trail/romania/brasov/canionul-7-scari" }
+        ]
+      },
+      restaurants: [
+        { name: { en: "Sergiana", he: "סרג'יאנה" }, meta: { en: "Old town", he: "העיר העתיקה" }, desc: { en: "Central, large seating capacity, own-farm Romanian classics — reserve ahead for 19.", he: "מרכזי, מקום ישיבה גדול, מנות רומניות קלאסיות מהחווה שלהם — להזמין מראש ל-19 איש." }, link: "https://www.sergiana.ro/en" },
+        { name: { en: "Coliba Haiducilor", he: "קוליבה הייידוצ'ילור" }, meta: { en: "Poiana Brașov", he: "פויאנה בראשוב" }, desc: { en: "Rustic-lodge setting with live folk music — built for big groups.", he: "אווירת בקתה כפרית עם מוזיקה עממית חיה — בנוי לקבוצות גדולות." }, link: "https://www.tripadvisor.com/Restaurant_Review-g616229-d2355599-Reviews-Coliba_Haiducilor-Poiana_Brasov_Brasov_County_Central_Romania_Transylvania.html" },
+        { name: { en: "Casa Romaneasca", he: "קאסה רומאנאסקה" }, meta: { en: "Schei district", he: "שכונת שיי" }, desc: { en: "Quieter, good value, less touristy than the main square.", he: "שקט יותר, מחיר טוב, פחות תיירותי מהכיכר הראשית." }, link: "https://www.tripadvisor.com/Restaurant_Review-g295394-d1106433-Reviews-Casa_Romaneasca-Brasov_Brasov_County_Central_Romania_Transylvania.html" }
+      ],
+      activities: [
+        { name: { en: "Bran Castle", he: "טירת בראן" }, meta: { en: "~30–40 min", he: "כ-30–40 דק'" }, desc: { en: "\"Dracula's Castle\" — best for older kids/teens (lots of stairs); the courtyard market is fun for everyone.", he: "\"טירת דרקולה\" — הכי מתאים לילדים גדולים ובני נוער (הרבה מדרגות); שוק החצר כיפי לכולם." }, link: "https://he.wikipedia.org/wiki/טירת_בראן" },
+        { name: { en: "Old Town & Rope Street", he: "העיר העתיקה ורחוב החבל" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "Council Square, the Black Church, and one of Europe's narrowest streets — a great low-key evening.", he: "כיכר העיר, הכנסייה השחורה, ואחד הרחובות הצרים באירופה — ערב נעים ורגוע." }, link: "https://he.wikipedia.org/wiki/בראשוב" },
+        { name: { en: "Aquatic Paradise / Smile Aqua Park", he: "פאראדיסול אקווטיק / סמייל אקווה פארק" }, meta: { en: "In Brașov", he: "בבראשוב" }, desc: { en: "Two water park options, slides for every intensity level, wellness area for grandparents.", he: "שני פארקי מים, מגלשות בכל רמת עוצמה, אזור ספא לסבים וסבתות." }, link: "https://www.paradisulacvatic.ro" },
+        { name: { en: "Adventure Park Brașov + Zoo", he: "פארק ההרפתקאות ובראשוב + גן החיות" }, meta: { en: "~10–15 min", he: "כ-10–15 דק'" }, desc: { en: "16 rope trails from age 4 up, plus a small zoo right next door.", he: "16 מסלולי חבלים מגיל 4, ולידם גן חיות קטן." }, link: "https://www.parc-aventura.ro/en" }
+      ]
+    },
+    {
+      property: { en: "Pension Casa Contelui", he: "פנסיון קאסה קונטלוי" },
+      bookingLink: "https://www.booking.com/hotel/ro/pensiunea-casa-contelui.html",
+      loc: { en: "Râșnov", he: "רישנוב" },
+      short: { en: "Râșnov", he: "רישנוב" },
+      checkIn: "30.08.2026", checkOut: "01.09.2026",
+      address: "Str. Nicolae Balcescu, Nr.16, Râșnov, 505400, Romania",
+      phone: "+40 745 931 513", booking: "", pin: "",
+      rooms: { en: "6 rooms", he: "6 חדרים" },
+      notes: { en: "9 adults + 9 children.", he: "9 מבוגרים + 9 ילדים." },
+      hikes: {
+        easy: [
+          { name: { en: "Cheile Râșnoavei gorge walk", he: "מסלול קניון רישנואבי" }, meta: { en: "Flat, pick your length · ~10–15 min drive", he: "שטוח, אורך לבחירה · כ-10–15 דק' נסיעה" }, desc: { en: "A shaded riverside gorge walk, toddler-friendly, popular local picnic spot.", he: "מסלול קניון מוצל לאורך נהר, מתאים לפעוטות, מקום פיקניק מקומי אהוב." }, link: "https://cheile-rasnoavei.ro/" },
+          { name: { en: "Zărnești Gorges", he: "קניוני זרנשטי" }, meta: { en: "~2 hrs round trip · ~20–25 min drive", he: "כ-2 שעות הלוך ושוב · כ-20–25 דק' נסיעה" }, desc: { en: "A dramatic narrow gorge on a flat, stroller-manageable path.", he: "קניון צר ומרשים על שביל שטוח, נוח לעגלות." }, link: "https://www.tripadvisor.com/Attraction_Review-g1913628-d12691076-Reviews-Prapastiile_Zarnestiului-Zarnesti_Brasov_County_Central_Romania_Transylvania.html" }
+        ],
+        medium: [
+          { name: { en: "Seven Ladders Canyon", he: "קניון שבע הסולמות" }, meta: { en: "~2.5–3.5 hrs · ~25–30 min drive", he: "כ-2.5–3.5 שעות · כ-25–30 דק' נסיעה" }, desc: { en: "Metal ladders on wet rock — needs comfort with heights, fine for teens and adults.", he: "סולמות מתכת על סלע רטוב — דורש נוחות עם גובה, מתאים לבני נוער ומבוגרים." }, link: "https://www.alltrails.com/trail/romania/brasov/canionul-7-scari" }
+        ],
+        hard: [
+          { name: { en: "Piatra Craiului Ridge", he: "רכס פייטרה קריולוי" }, meta: { en: "Full day to 2 days · ~30–40 min to trailhead", he: "יום שלם עד יומיים · כ-30–40 דק' לתחילת מסלול" }, desc: { en: "The signature big hike of the region — a 25km blade of limestone ridge.", he: "טיול הדגל של האזור — רכס גיר מרשים באורך 25 ק\"מ." }, link: "https://www.alltrails.com/explore/recording/creasta-piatra-craiului--2" }
+        ]
+      },
+      restaurants: [
+        { name: { en: "Antichi Sapori", he: "אנטיקי סאפורי" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "Wood-fired pizza, kid-tested and casual.", he: "פיצה מתנור עצים, בדוקה על ילדים ואווירה קז'ואל." }, link: "https://antichi-sapori.ro/" },
+        { name: { en: "Berăria RAO", he: "בררייה ראו" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "Transylvanian beer-hall style, built for long group tables.", he: "סגנון בית בירה טרנסילבני, בנוי לשולחנות קבוצתיים ארוכים." }, link: "https://www.tripadvisor.com/Restaurant_Review-g946544-d26865159-Reviews-Beraria_RAO-Rasnov_Brasov_County_Central_Romania_Transylvania.html" },
+        { name: { en: "Pensiunea Restaurant Rosenau", he: "פנסיונה רזטורן רוזנאו" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "Reviewed well by a group of 9 — good value, wide menu.", he: "ביקורות טובות מקבוצה של 9 — מחיר טוב, תפריט רחב." }, link: "https://www.rosenau.ro/" }
+      ],
+      activities: [
+        { name: { en: "Dino Parc Râșnov", he: "דינו פארק רישנוב" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "125 animatronic dinosaurs, trails, laser maze — great toddler-to-teen appeal.", he: "125 דינוזאורים אנימטרוניים, מסלולים, מבוך לייזר — מתאים מפעוטות עד בני נוער." }, link: "https://dinoparc.ro/en/" },
+        { name: { en: "Libearty Bear Sanctuary", he: "מקלט הדובים ליברטי" }, meta: { en: "Zărnești, ~15–20 min", he: "זרנשטי, כ-15–20 דק'" }, desc: { en: "Europe's largest brown bear sanctuary — a guided 1-hour walking tour, reserve ahead.", he: "מקלט הדובים החומים הגדול באירופה — סיור מודרך של שעה, להזמין מראש." }, link: "https://millionsoffriends.org/en/libearty/" }
+      ],
+      flags: [ { en: "Râșnov Citadel's interior has been under restoration since 2020 (expected ~2027) — only the garden and Báthory Tower are open, not the full fortress.", he: "פנים מבצר רישנוב בשיפוצים מאז 2020 (משוער סיום ~2027) — פתוחים רק הגן ומגדל בטורי, לא המבצר המלא." } ]
+    },
+    {
+      property: { en: "Vila 18 Hotel Boutique", he: "וילה 18 הוטל בוטיק" },
+      bookingLink: "https://www.booking.com/hotel/ro/vila-18-boutique.html",
+      loc: { en: "Bucharest (Sector 4)", he: "בוקרשט (מחוז 4)" },
+      short: { en: "Bucharest", he: "בוקרשט" },
+      checkIn: "01.09.2026", checkOut: "03.09.2026",
+      address: "Strada Mitropolit Filaret nr 18, Sector 4, 040503 Bucharest, Romania",
+      phone: "+40 729 420 921", booking: "5667553387", pin: "",
+      rooms: { en: "7 rooms", he: "7 חדרים" },
+      notes: { en: "Last stop before flying home — 9 adults + 10 children.", he: "התחנה האחרונה לפני הטיסה הביתה — 9 מבוגרים + 10 ילדים." },
+      hikes: null,
+      restaurants: [
+        { name: { en: "Caru' cu Bere", he: "קארו קו בררה" }, meta: { en: "Old Town · reserve ahead", he: "העיר העתיקה · להזמין מראש" }, desc: { en: "Bucharest's most famous restaurant since 1879 — stained glass, live folk dancing, handles large parties.", he: "המסעדה המפורסמת בבוקרשט מאז 1879 — ויטראז'ים, ריקוד עממי חי, מתאימה לקבוצות גדולות." }, link: "https://www.carucubere.ro/en/" },
+        { name: { en: "Casa Oprescu", he: "קאסה אופרסקו" }, meta: { en: "Near Sector 4", he: "ליד מחוז 4" }, desc: { en: "Traditional Romanian food, close to your final hotel, built for family gatherings.", he: "אוכל רומני מסורתי, קרוב למלון האחרון, בנוי למפגשי משפחה." }, link: "https://casaoprescu.ro/" },
+        { name: { en: "Hanu' lui Manuc", he: "האנו לוי מנוק" }, meta: { en: "Old Town", he: "העיר העתיקה" }, desc: { en: "Bucharest's oldest inn — large courtyard, multiple dining rooms for groups.", he: "האכסניה העתיקה בבוקרשט — חצר גדולה, כמה חדרי אוכל לקבוצות." }, link: "https://hanumanucrestaurant.ro/en/" }
+      ],
+      activities: [
+        { name: { en: "Herăstrău Park + Miramagica", he: "פארק הרסטראו + מירמג'יקה" }, meta: { en: "Flat, stroller-friendly", he: "שטוח, נוח לעגלות" }, desc: { en: "A huge lakeside park with a mini amusement park inside — the tallest Ferris wheel in Romania.", he: "פארק ענק ליד אגם עם פארק שעשועים מיני בתוכו — הגלגל הענק הגבוה ברומניה." }, link: "https://he.wikipedia.org/wiki/פארק_הרסטראו" },
+        { name: { en: "Village Museum", he: "מוזיאון הכפר" }, meta: { en: "Next to Herăstrău", he: "ליד הרסטראו" }, desc: { en: "300+ real Romanian farmhouses — flat outdoor walking, craft workshops for kids.", he: "יותר מ-300 בתי כפר רומניים אמיתיים — הליכה שטוחה בחוץ, סדנאות מלאכת יד לילדים." }, link: "https://muzeul-satului.ro/en/" },
+        { name: { en: "Antipa Natural History Museum", he: "מוזיאון אנטיפא להיסטוריה של הטבע" }, meta: { en: "Indoor, good for a hot day", he: "בפנים, טוב ליום חם" }, desc: { en: "Fully interactive exhibits — a strong option across the whole toddler-to-grandparent range.", he: "תערוכות אינטראקטיביות לגמרי — אופציה טובה לכל הטווח, מפעוטות עד סבים וסבתות." }, link: "https://www.antipa.ro/" },
+        { name: { en: "Old Town + Cișmigiu Gardens", he: "העיר העתיקה וגני צ'ישמיג'יו" }, meta: { en: "Walkable", he: "ניתן להליכה" }, desc: { en: "Cobblestone sightseeing plus a shaded park with a playground and boat rides — good final-day pace.", he: "סיור באבני ריצוף ופארק מוצל עם מתקן משחקים וסירות — קצב נעים ליום האחרון." }, link: "https://he.wikipedia.org/wiki/גן_צ'ישמיג'יו" }
+      ]
+    }
+  ];
+
+  /* ============ DATA: packing ============ */
+  var packBase = [
+    { en: "Underwear", he: "תחתונים" },
+    { en: "Socks", he: "גרביים" },
+    { en: "T-shirts", he: "חולצות" },
+    { en: "Shorts / pants", he: "מכנסיים קצרים / ארוכים" },
+    { en: "Pajamas", he: "פיג'מה" },
+    { en: "Toothbrush + toothpaste", he: "מברשת ומשחת שיניים" },
+    { en: "Deodorant", he: "דאודורנט" },
+    { en: "Hairbrush", he: "מברשת שיער" },
+    { en: "Passport + confirmations", he: "דרכון + אישורי הזמנה" },
+    { en: "Phone charger", he: "מטען לטלפון" },
+    { en: "EU power adapter", he: "מתאם חשמל אירופי" },
+    { en: "Sunscreen", he: "קרם הגנה" },
+    { en: "Sunglasses", he: "משקפי שמש" },
+    { en: "Rain jacket", he: "מעיל גשם" },
+    { en: "Warm layer (fleece/jacket)", he: "שכבה חמה (פליז/מעיל)" }
+  ];
+
+  var packByBand = {
+    baby: [
+      { en: "Diapers + wipes", he: "חיתולים ומגבונים" },
+      { en: "Stroller / carrier", he: "עגלה / מנשא" },
+      { en: "Comfort toy", he: "צעצוע מרגיע" },
+      { en: "Extra outfits", he: "בגדים להחלפה" },
+      { en: "Snacks", he: "חטיפים" },
+      { en: "Car seat (if renting)", he: "כיסא בטיחות (אם שוכרים רכב)" },
+      { en: "Sun hat", he: "כובע שמש" }
+    ],
+    toddler: [
+      { en: "Stroller / carrier", he: "עגלה / מנשא" },
+      { en: "Comfort toy", he: "צעצוע מרגיע" },
+      { en: "Extra outfit", he: "בגד להחלפה" },
+      { en: "Snacks", he: "חטיפים" },
+      { en: "Car seat (if renting)", he: "כיסא בטיחות (אם שוכרים רכב)" },
+      { en: "Swimsuit + towel", he: "בגד ים ומגבת" },
+      { en: "Closed shoes", he: "נעליים סגורות" },
+      { en: "Sun hat", he: "כובע שמש" }
+    ],
+    kid: [
+      { en: "Swimsuit + towel", he: "בגד ים ומגבת" },
+      { en: "Closed shoes", he: "נעליים סגורות" },
+      { en: "Extra socks", he: "גרביים נוספות" },
+      { en: "Motion sickness tablets", he: "כדורים לבחילת נסיעה" },
+      { en: "Small backpack", he: "תיק גב קטן" },
+      { en: "Sun hat", he: "כובע שמש" }
+    ],
+    teen: [
+      { en: "Swimsuit + towel", he: "בגד ים ומגבת" },
+      { en: "Sneakers / hiking shoes", he: "נעלי ספורט / הליכה" },
+      { en: "Headphones / power bank", he: "אוזניות / סוללה ניידת" },
+      { en: "Rain jacket", he: "מעיל גשם" }
+    ],
+    adult: [
+      { en: "Hiking shoes", he: "נעלי הליכה" },
+      { en: "Daypack + water bottle", he: "תיק גב ובקבוק מים" },
+      { en: "Swimsuit", he: "בגד ים" },
+      { en: "First aid kit", he: "ערכת עזרה ראשונה" }
+    ],
+    senior: [
+      { en: "Walking shoes", he: "נעלי הליכה נוחות" },
+      { en: "Medications", he: "תרופות" },
+      { en: "Sun hat", he: "כובע שמש" }
+    ]
+  };
+
+  var sharedGear = [
+    { en: "Stroller / carrier", he: "עגלה / מנשא" },
+    { en: "Printed reservations", he: "הזמנות מודפסות" },
+    { en: "Power adapter + charger", he: "מתאם חשמל ומטען" }
+  ];
+
+  /* ============ RENDER ============ */
+  var tabDefs = [
+    { id: "home", labelKey: "navHome" },
+    { id: "flights", labelKey: "navFlights" },
+    { id: "packing", labelKey: "navPacking" }
+  ];
+
+  var stopColors = ["#5B6B78", "#3F7856", "#2E7A74", "#B08628", "#A0502D", "#6B2F44", "#4A5A8C"];
+
+  function parseDMY(s) {
+    var p = s.split(".");
+    return new Date(parseInt(p[2], 10), parseInt(p[1], 10) - 1, parseInt(p[0], 10));
+  }
+
+  function stopIndexForDate(d) {
+    for (var i = 0; i < stops.length; i++) {
+      var ci = parseDMY(stops[i].checkIn), co = parseDMY(stops[i].checkOut);
+      if (d >= ci && d < co) return i;
+    }
+    return -1;
+  }
+
+  function sameDay(a, b) {
+    return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  }
+
+  function renderCalendar() {
+    var wrap = document.getElementById("calendar");
+    var tripStart = parseDMY(stops[0].checkIn);
+    var tripEnd = parseDMY(stops[stops.length - 1].checkOut);
+
+    var gridStart = new Date(tripStart);
+    gridStart.setDate(gridStart.getDate() - gridStart.getDay());
+    var gridEnd = new Date(tripEnd);
+    gridEnd.setDate(gridEnd.getDate() + (6 - gridEnd.getDay()));
+
+    var dowLabels = lang === "he"
+      ? ["א", "ב", "ג", "ד", "ה", "ו", "ש"]
+      : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    var html = '<div class="cal-wrap"><div class="cal-grid">';
+    dowLabels.forEach(function (d) { html += '<div class="cal-dow">' + d + "</div>"; });
+
+    var lastIdx = stops.length - 1;
+    var cur = new Date(gridStart);
+    while (cur <= gridEnd) {
+      var isDeparture = sameDay(cur, tripEnd);
+      var idx = (cur >= tripStart && cur < tripEnd) ? stopIndexForDate(cur) : -1;
+      if (idx >= 0) {
+        html += '<div class="cal-cell trip" style="background:' + stopColors[idx % stopColors.length] + ';" data-idx="' + idx + '" tabindex="0" role="button">' +
+          '<span class="cal-day">' + cur.getDate() + '</span><span class="cal-loc">' + tf(stops[idx].short) + "</span></div>";
+      } else if (isDeparture) {
+        html += '<div class="cal-cell trip departure" style="background:' + stopColors[lastIdx % stopColors.length] + ';" data-flight="1" tabindex="0" role="button">' +
+          '<span class="cal-day">' + cur.getDate() + '</span><span class="cal-loc">✈ ' + t("calFlightHome") + "</span></div>";
+      } else {
+        html += '<div class="cal-cell pad"><span class="cal-day">' + cur.getDate() + "</span></div>";
+      }
+      cur.setDate(cur.getDate() + 1);
+    }
+    html += "</div></div>";
+    wrap.innerHTML = html;
+
+    wrap.querySelectorAll(".cal-cell.trip[data-idx]").forEach(function (cell) {
+      cell.addEventListener("click", function () { openStop(parseInt(cell.dataset.idx, 10)); });
+      cell.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openStop(parseInt(cell.dataset.idx, 10)); }
+      });
+    });
+    wrap.querySelectorAll(".cal-cell.departure").forEach(function (cell) {
+      cell.addEventListener("click", function () { switchView("flights"); });
+      cell.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); switchView("flights"); }
+      });
+    });
+  }
+
+  function openStop(idx) {
+    var el = document.getElementById("stop-" + idx);
+    if (!el) return;
+    el.classList.add("open");
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function renderTabs() {
+    var nav = document.getElementById("tabs");
+    nav.innerHTML = "";
+    tabDefs.forEach(function (d, i) {
+      var b = document.createElement("button");
+      b.className = "tab" + (i === 0 ? " active" : "");
+      b.textContent = t(d.labelKey);
+      b.dataset.view = d.id;
+      b.addEventListener("click", function () { switchView(d.id); });
+      nav.appendChild(b);
+    });
+  }
+
+  function switchView(id) {
+    document.querySelectorAll(".tab").forEach(function (b) { b.classList.toggle("active", b.dataset.view === id); });
+    document.querySelectorAll("main.view").forEach(function (m) { m.classList.toggle("active", m.dataset.view === id); });
+  }
+
+  function renderStaticText() {
+    document.querySelectorAll("[data-t]").forEach(function (el) {
+      el.textContent = t(el.getAttribute("data-t"));
+    });
+    var ph = document.getElementById("gateInput");
+    if (ph) ph.placeholder = t("gatePh");
+    document.getElementById("langToggle").textContent = lang === "en" ? "עברית" : "English";
+    document.documentElement.setAttribute("dir", lang === "he" ? "rtl" : "ltr");
+    document.documentElement.setAttribute("lang", lang === "he" ? "he" : "en");
+  }
+
+  function renderPreflight() {
+    var ul = document.getElementById("preflightList");
+    ul.innerHTML = "";
+    preflight.forEach(function (item, i) {
+      var li = document.createElement("li");
+      var id = "pf" + i;
+      li.innerHTML = '<input type="checkbox" id="' + id + '" />' +
+        '<label for="' + id + '">' + tf(item) + "</label>";
+      ul.appendChild(li);
+    });
+    wireChecks(ul, "yr_preflight");
+  }
+
+  function wireChecks(container, storeKey) {
+    var saved = JSON.parse(localStorage.getItem(storeKey) || "{}");
+    container.querySelectorAll('input[type="checkbox"]').forEach(function (cb, i) {
+      cb.checked = !!saved[i];
+      cb.addEventListener("change", function () {
+        var s = JSON.parse(localStorage.getItem(storeKey) || "{}");
+        s[i] = cb.checked;
+        localStorage.setItem(storeKey, JSON.stringify(s));
+      });
+    });
+  }
+
+  function renderFlights() {
+    var card = document.getElementById("flightsCard");
+    function row(f) {
+      return '<div class="flight-row">' +
+        '<div><div class="flight-route num">' + f.route + (f.flightNo ? " · " + f.flightNo : "") + '</div>' +
+        '<div class="flight-meta num">' + f.date + " · " + f.dep + " → " + f.arr + "</div></div>" +
+        '<div class="flight-who">' + tf(f.who) + "</div></div>";
+    }
+    var html = '<p class="eyebrow" style="margin-bottom:8px;">' +
+      (lang === "he" ? "הלוך — 17.08" : "Outbound — Aug 17") + "</p>";
+    html += flights.out.map(row).join("");
+    html += '<p class="eyebrow" style="margin:18px 0 8px;">' +
+      (lang === "he" ? "חזור — 03.09" : "Return — Sep 3") + "</p>";
+    html += flights.back.map(row).join("");
+    card.innerHTML = html;
+  }
+
+  function nameHtml(item) {
+    return item.link
+      ? '<a href="' + item.link + '" target="_blank" rel="noopener">' + tf(item.name) + "</a>"
+      : tf(item.name);
+  }
+
+  function diffList(items, diffKey, diffClass) {
+    if (!items || !items.length) return "";
+    var rows = items.map(function (h) {
+      return '<div class="reco"><div class="name"><span class="pill ' + diffClass + '">' + t(diffKey) + '</span>' + nameHtml(h) + '</div>' +
+        '<div class="meta">' + tf(h.meta) + '</div><div class="desc">' + tf(h.desc) + "</div></div>";
+    }).join("");
+    return '<div class="diff-group">' + rows + "</div>";
+  }
+
+  function renderStops() {
+    var wrap = document.getElementById("stopsList");
+    wrap.innerHTML = "";
+    stops.forEach(function (s, idx) {
+      var stopEl = document.createElement("div");
+      stopEl.className = "stop";
+      stopEl.id = "stop-" + idx;
+
+      var flagsHtml = (s.flags || []).map(function (f) {
+        return '<div class="flag-box"><strong>' + (lang === "he" ? "לתשומת לב: " : "Heads up: ") + "</strong>" + tf(f) + "</div>";
+      }).join("");
+
+      var notesHtml = s.notes ? '<p class="lede" style="margin-bottom:12px;">' + tf(s.notes) + "</p>" : "";
+
+      var resRows = [
+        ["checkIn", s.checkIn], ["checkOut", s.checkOut]
+      ];
+      if (s.rooms) resRows.push(["rooms", tf(s.rooms)]);
+      if (s.phone) resRows.push(["phone", s.phone]);
+      resRows.push(["booking", s.booking || t("pending")]);
+      if (s.pin) resRows.push(["pin", s.pin]);
+
+      var resHtml = resRows.map(function (r) {
+        return '<div class="res-item"><span class="k">' + t(r[0]) + '</span><span class="v num">' + r[1] + "</span></div>";
+      }).join("");
+
+      var hasHikes = s.hikes && (s.hikes.easy.length || s.hikes.medium.length || s.hikes.hard.length);
+
+      var subtabsHtml = '<div class="subtabs">';
+      if (s.hikes !== null) subtabsHtml += '<button class="subtab active" data-sub="hikes">' + t("tabHikes") + "</button>";
+      subtabsHtml += '<button class="subtab' + (s.hikes === null ? " active" : "") + '" data-sub="restaurants">' + t("tabRestaurants") + "</button>";
+      subtabsHtml += '<button class="subtab" data-sub="activities">' + t("tabActivities") + "</button>";
+      subtabsHtml += "</div>";
+
+      var hikesPanel = "";
+      if (s.hikes !== null) {
+        hikesPanel = '<div class="subpanel active" data-panel="hikes">' +
+          diffList(s.hikes.easy, "diffEasy", "easy") +
+          diffList(s.hikes.medium, "diffMedium", "medium") +
+          diffList(s.hikes.hard, "diffHard", "hard") +
+          "</div>";
+      }
+
+      var restPanel = '<div class="subpanel' + (s.hikes === null ? " active" : "") + '" data-panel="restaurants">' +
+        s.restaurants.map(function (r) {
+          return '<div class="reco"><div class="name">' + nameHtml(r) + '</div><div class="meta">' + tf(r.meta) + '</div><div class="desc">' + tf(r.desc) + "</div></div>";
+        }).join("") + "</div>";
+
+      var actPanel = '<div class="subpanel" data-panel="activities">' +
+        (s.activities.length ? s.activities.map(function (a) {
+          return '<div class="reco"><div class="name">' + nameHtml(a) + '</div><div class="meta">' + tf(a.meta) + '</div><div class="desc">' + tf(a.desc) + "</div></div>";
+        }).join("") : '<p class="desc" style="padding:10px 0;">' + t("noHikesNote") + "</p>") + "</div>";
+
+      var propHtml = s.bookingLink
+        ? '<a class="prop-link" href="' + s.bookingLink + '" target="_blank" rel="noopener">' + tf(s.property) + " ↗</a>"
+        : tf(s.property);
+
+      stopEl.innerHTML =
+        '<div class="stop-head">' +
+          '<span class="stop-num">' + t("stopNum") + " " + (idx + 1) + "/" + stops.length + "</span>" +
+          '<div class="stop-title"><div class="prop">' + propHtml + '</div><div class="loc">' + tf(s.loc) + "</div></div>" +
+          '<div class="stop-dates num">' + s.checkIn + "<br />→ " + s.checkOut + "</div>" +
+          '<span class="chev">▶</span>' +
+        "</div>" +
+        '<div class="stop-body">' +
+          flagsHtml +
+          '<div class="res-grid">' + resHtml + "</div>" +
+          notesHtml +
+          '<a class="maplink" target="_blank" rel="noopener" href="' + addr(s.address) + '">' + t("mapLink") + "</a>" +
+          '<div style="margin-top:16px;">' +
+            subtabsHtml +
+            hikesPanel + restPanel + actPanel +
+          "</div>" +
+        "</div>";
+
+      stopEl.querySelector(".stop-head").addEventListener("click", function () {
+        stopEl.classList.toggle("open");
+      });
+
+      var propLinkEl = stopEl.querySelector(".prop-link");
+      if (propLinkEl) propLinkEl.addEventListener("click", function (e) { e.stopPropagation(); });
+
+      stopEl.querySelectorAll(".subtab").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          stopEl.querySelectorAll(".subtab").forEach(function (b2) { b2.classList.remove("active"); });
+          stopEl.querySelectorAll(".subpanel").forEach(function (p) { p.classList.remove("active"); });
+          btn.classList.add("active");
+          stopEl.querySelector('.subpanel[data-panel="' + btn.dataset.sub + '"]').classList.add("active");
+        });
+      });
+
+      wrap.appendChild(stopEl);
+    });
+  }
+
+  function renderPackSelect() {
+    var sel = document.getElementById("packSelect");
+    var prevValue = sel.value;
+    sel.innerHTML = '<option value="">' + t("packSelectEveryone") + "</option>" +
+      families.map(function (f) { return '<option value="' + f.id + '">' + tf(f.name) + "</option>"; }).join("");
+    sel.value = prevValue;
+    sel.onchange = function () { renderPackResult(sel.value); };
+    renderPackResult(sel.value);
+  }
+
+  function renderPackResult(famId) {
+    var out = document.getElementById("packResult");
+    if (!famId) { out.innerHTML = ""; return; }
+    var fam = families.filter(function (f) { return f.id === famId; })[0];
+    if (!fam) { out.innerHTML = ""; return; }
+
+    var html = "";
+    var bandsPresent = {};
+    fam.members.forEach(function (m) {
+      var band = ageBand(m.age);
+      bandsPresent[band] = true;
+      var extra = packByBand[band] || [];
+      var all = packBase.concat(extra);
+      var storeKey = "yr_pack_" + fam.id + "_" + m.name;
+      var items = all.map(function (item, i) {
+        var id = storeKey + "_" + i;
+        return '<li><input type="checkbox" id="' + id + '" /><label for="' + id + '">' + tf(item) + "</label></li>";
+      }).join("");
+      html += '<div class="pack-person"><h4>' + m.name + "</h4>" +
+        '<div class="card"><ul class="check" data-store="' + storeKey + '">' + items + "</ul></div></div>";
+    });
+
+    html += '<div class="pack-person"><h4>' + t("sharedGear") + "</h4><div class=\"card\"><ul class=\"check\" data-store=\"yr_pack_" + fam.id + "_shared\">" +
+      sharedGear.map(function (item, i) {
+        var id = "shared_" + fam.id + "_" + i;
+        return '<li><input type="checkbox" id="' + id + '" /><label for="' + id + '">' + tf(item) + "</label></li>";
+      }).join("") + "</ul></div></div>";
+
+    out.innerHTML = html;
+    out.querySelectorAll("ul.check").forEach(function (ul) {
+      wireChecks(ul, ul.dataset.store);
+    });
+  }
+
+  function renderAll() {
+    renderStaticText();
+    renderTabs();
+    renderCalendar();
+    renderStops();
+    renderFlights();
+    renderPreflight();
+    renderPackSelect();
+  }
+
+  document.getElementById("langToggle").addEventListener("click", function () {
+    lang = lang === "en" ? "he" : "en";
+    localStorage.setItem("yr_lang", lang);
+    var activeView = document.querySelector("main.view.active");
+    var activeViewId = activeView ? activeView.dataset.view : "home";
+    renderAll();
+    switchView(activeViewId);
+  });
+
+  /* ============ password gate ============ */
+  function cleanPw(s) {
+    var strip = [0x200B, 0x200C, 0x200D, 0x200E, 0x200F, 0x202A, 0x202B, 0x202C, 0x202D, 0x202E, 0x2066, 0x2067, 0x2068, 0x2069, 0xFEFF];
+    var out = "";
+    for (var i = 0; i < s.length; i++) {
+      if (strip.indexOf(s.charCodeAt(i)) === -1) out += s[i];
+    }
+    return out.trim();
+  }
+  function tryUnlock() {
+    var val = cleanPw(document.getElementById("gateInput").value);
+    if (val === cleanPw(SITE_PASSWORD)) {
+      localStorage.setItem("yr_unlocked", "1");
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("app").classList.add("visible");
+    } else {
+      document.getElementById("gate-error").textContent = t("gateWrong");
+    }
+  }
+  document.getElementById("gateBtn").addEventListener("click", tryUnlock);
+  document.getElementById("gateInput").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") tryUnlock();
+  });
+
+  /* ============ standalone download (for sharing outside the org) ============ */
+  function buildStandaloneHtml() {
+    var clone = document.documentElement.cloneNode(true);
+    var gateClone = clone.querySelector("#gate");
+    var appClone = clone.querySelector("#app");
+    var inputClone = clone.querySelector("#gateInput");
+    var errClone = clone.querySelector("#gate-error");
+    if (gateClone) gateClone.style.display = "";
+    if (appClone) appClone.classList.remove("visible");
+    if (inputClone) inputClone.value = "";
+    if (errClone) errClone.textContent = "";
+    return "<!doctype html>\n" + clone.outerHTML;
+  }
+
+  function saveStandaloneFile(filename) {
+    return window.claude.downloads.save({ filename: filename, data: buildStandaloneHtml() });
+  }
+
+  function wireDownloadButton() {
+    var btn = document.getElementById("downloadBtn");
+    if (!window.claude || !window.claude.downloads) return;
+    btn.style.display = "inline-block";
+    btn.addEventListener("click", function () {
+      btn.disabled = true;
+      saveStandaloneFile("yudke-romania-trip.html")
+        .then(function () {
+          window.alert(t("downloadHint"));
+        })
+        .catch(function (err) {
+          if (err && err.code === "extension_not_enabled") {
+            saveStandaloneFile("yudke-romania-trip.txt")
+              .then(function () {
+                window.alert(t("downloadHint") + (lang === "he"
+                  ? " (הקובץ נשמר בתור .txt — שנו את הסיומת ל-.html כדי שיפתח כאתר)"
+                  : " (saved as .txt — rename the file extension to .html so it opens as a webpage)"));
+              })
+              .catch(function () { window.alert(t("downloadFail")); });
+          } else if (err && err.code !== "declined") {
+            window.alert(t("downloadFail"));
+          }
+        })
+        .finally(function () { btn.disabled = false; });
+    });
+  }
+
+  renderStaticText();
+  if (localStorage.getItem("yr_unlocked") === "1") {
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("app").classList.add("visible");
+  }
+  renderAll();
+  wireDownloadButton();
+})();
+</script>
