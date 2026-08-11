@@ -309,6 +309,20 @@
   .route-figure svg { display: block; }
   .route-figure figcaption { margin-top: 8px; margin-bottom: 0; }
 
+  .near-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .near-btn {
+    border: 1px solid var(--border);
+    background: var(--paper-raised);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .near-btn:hover { border-color: var(--forest); }
+  .near-btn:disabled { opacity: 0.6; cursor: default; }
+
   .flag-box {
     background: var(--rust-soft);
     border: 1px solid var(--rust);
@@ -500,6 +514,14 @@
 
       <a id="routeMapLink" class="maplink" target="_blank" rel="noopener" data-t="mapOpenFull">Open full route in Google Maps ↗</a>
     </section>
+
+    <section class="block">
+      <p class="eyebrow" data-t="nearEyebrow">While you're on the road</p>
+      <h2 data-t="nearTitle">Find things near you right now</h2>
+      <p class="lede" data-t="nearLede">Uses your phone's current location — nothing is sent to us or stored.</p>
+      <div class="near-grid" id="nearGrid"></div>
+      <p class="lede" id="nearStatus" style="margin-top:10px;"></p>
+    </section>
   </main>
 
   <main class="view" data-view="flights">
@@ -561,6 +583,12 @@
     mapLede: { en: "All 7 stops, in order, pinned on Google Maps.", he: "כל 7 התחנות, בסדר, מסומנות במפות גוגל." },
     mapOpenFull: { en: "Open full route in Google Maps ↗", he: "פתיחת המסלול המלא במפות גוגל ↖" },
     mapCaption: { en: "A simplified sketch, not to scale — for the real thing, use the link below.", he: "שרטוט פשוט, לא בקנה מידה — לשימוש אמיתי, הקישור למטה." },
+    nearEyebrow: { en: "While you're on the road", he: "בזמן הנסיעה" },
+    nearTitle: { en: "Find things near you right now", he: "מציאת דברים קרובים אליכם עכשיו" },
+    nearLede: { en: "Uses your phone's current location — nothing is sent to us or stored.", he: "משתמש במיקום הנוכחי של הטלפון — שום דבר לא נשלח או נשמר אצלנו." },
+    nearUnsupported: { en: "This device doesn't support location.", he: "המכשיר הזה לא תומך באיתור מיקום." },
+    nearLoading: { en: "Finding your location…", he: "מאתר מיקום…" },
+    nearDenied: { en: "Couldn't get your location — check location permission for this browser.", he: "לא הצלחנו לאתר מיקום — בדקו הרשאת מיקום בדפדפן." },
     homeEyebrow: { en: "Day by day", he: "יום אחרי יום" },
     homeTitle: { en: "19 of us, 7 stops, 18 days", he: "19 נוסעים, 7 תחנות, 18 ימים" },
     homeLede: { en: "Tap a day to jump straight to that stop — reservation details, hikes by difficulty, restaurants, and family activities nearby.", he: "לחצו על יום כדי לקפוץ ישר לתחנה — פרטי הזמנה, טיולים לפי רמת קושי, מסעדות ופעילויות משפחתיות בסביבה." },
@@ -1255,6 +1283,48 @@
     document.getElementById("routeMapLink").href = "https://www.google.com/maps/dir/" + path;
   }
 
+  var nearCategories = [
+    { query: "restaurants", label: { en: "🍽 Restaurants", he: "🍽 מסעדות" } },
+    { query: "gas station", label: { en: "⛽ Gas station", he: "⛽ תחנת דלק" } },
+    { query: "pharmacy", label: { en: "💊 Pharmacy", he: "💊 בית מרקחת" } },
+    { query: "hospital", label: { en: "🏥 Hospital", he: "🏥 בית חולים" } },
+    { query: "supermarket", label: { en: "🛒 Supermarket", he: "🛒 סופרמרקט" } }
+  ];
+
+  function findNear(query, btn) {
+    var status = document.getElementById("nearStatus");
+    if (!navigator.geolocation) {
+      status.textContent = t("nearUnsupported");
+      return;
+    }
+    status.textContent = t("nearLoading");
+    btn.disabled = true;
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        status.textContent = "";
+        btn.disabled = false;
+        var url = "https://www.google.com/maps/search/" + encodeURIComponent(query) +
+          "/@" + pos.coords.latitude + "," + pos.coords.longitude + ",15z";
+        window.open(url, "_blank");
+      },
+      function () {
+        status.textContent = t("nearDenied");
+        btn.disabled = false;
+      },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+    );
+  }
+
+  function renderNear() {
+    var grid = document.getElementById("nearGrid");
+    grid.innerHTML = nearCategories.map(function (c) {
+      return '<button class="near-btn" data-query="' + c.query + '">' + tf(c.label) + "</button>";
+    }).join("");
+    grid.querySelectorAll(".near-btn").forEach(function (btn, i) {
+      btn.addEventListener("click", function () { findNear(nearCategories[i].query, btn); });
+    });
+  }
+
   function renderAll() {
     renderStaticText();
     renderTabs();
@@ -1264,6 +1334,7 @@
     renderPreflight();
     renderPackSelect();
     renderRouteMap();
+    renderNear();
   }
 
   document.getElementById("langToggle").addEventListener("click", function () {
