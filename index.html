@@ -305,15 +305,9 @@
   .res-item .v { font-weight: 700; }
   .maplink { font-size: 0.8rem; text-decoration: none; font-weight: 700; }
 
-  .map-embed-wrap {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 12px;
-    aspect-ratio: 4 / 3;
-  }
-  .map-embed-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
-  @media (min-width: 560px) { .map-embed-wrap { aspect-ratio: 16 / 9; } }
+  .route-figure { margin: 4px 0 14px; }
+  .route-figure svg { display: block; }
+  .route-figure figcaption { margin-top: 8px; margin-bottom: 0; }
 
   .flag-box {
     background: var(--rust-soft);
@@ -446,9 +440,64 @@
       <p class="eyebrow" data-t="mapEyebrow">The whole route</p>
       <h2 data-t="mapTitle">Route map</h2>
       <p class="lede" data-t="mapLede">All 7 stops, in order, pinned on Google Maps.</p>
-      <div class="map-embed-wrap">
-        <iframe id="routeMapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Route map"></iframe>
-      </div>
+
+      <figure class="route-figure">
+        <svg viewBox="0 0 640 460" role="img" aria-label="Sketch map of the route through Romania: Bucharest to Fagaras to Moisei to Sovata to Brasov to Rasnov and back to Bucharest" style="width:100%;height:auto;">
+          <defs>
+            <marker id="routeArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--forest)"></path>
+            </marker>
+          </defs>
+
+          <path d="M80 180 C 60 100, 140 40, 260 50 C 340 20, 430 10, 480 60 C 560 90, 600 160, 560 240 C 590 300, 540 380, 460 400 C 380 440, 280 430, 220 400 C 140 410, 70 360, 60 280 C 40 230, 60 200, 80 180 Z"
+                fill="var(--forest-soft)" stroke="var(--border)" stroke-width="1.5"></path>
+
+          <g fill="var(--border)" opacity="0.7">
+            <path d="M270 150 l14 -22 l14 22 z"></path>
+            <path d="M300 140 l12 -20 l12 20 z"></path>
+            <path d="M330 175 l13 -21 l13 21 z"></path>
+            <path d="M355 210 l12 -19 l12 19 z"></path>
+          </g>
+
+          <polyline points="365,315 289,247 299,123 326,190 353,249 372,275 391,330"
+                    fill="none" stroke="var(--forest)" stroke-width="2.5" stroke-linejoin="round"
+                    marker-end="url(#routeArrow)"></polyline>
+
+          <g font-size="12.5" fill="currentColor">
+            <circle cx="365" cy="315" r="10" fill="#5B6B78"></circle>
+            <text x="365" y="318" text-anchor="middle" fill="#fff" font-weight="700" font-size="10">1</text>
+            <text x="345" y="300" text-anchor="end" font-weight="700">Bucharest</text>
+            <text x="345" y="313" text-anchor="end" font-size="10.5" opacity="0.75">arrival</text>
+
+            <circle cx="289" cy="247" r="10" fill="#3F7856"></circle>
+            <text x="289" y="250" text-anchor="middle" fill="#fff" font-weight="700" font-size="10">2</text>
+            <text x="266" y="243" text-anchor="end" font-weight="700">Făgăraș</text>
+
+            <circle cx="299" cy="123" r="10" fill="#2E7A74"></circle>
+            <text x="299" y="126" text-anchor="middle" fill="#fff" font-weight="700" font-size="10">3</text>
+            <text x="299" y="104" text-anchor="middle" font-weight="700">Moisei</text>
+
+            <circle cx="326" cy="190" r="10" fill="#B08628"></circle>
+            <text x="326" y="193" text-anchor="middle" fill="#fff" font-weight="700" font-size="10">4</text>
+            <text x="349" y="187" text-anchor="start" font-weight="700">Sovata</text>
+
+            <circle cx="353" cy="249" r="10" fill="#A0502D"></circle>
+            <text x="353" y="252" text-anchor="middle" fill="#fff" font-weight="700" font-size="10">5</text>
+            <text x="376" y="242" text-anchor="start" font-weight="700">Brașov</text>
+
+            <circle cx="372" cy="275" r="10" fill="#6B2F44"></circle>
+            <text x="372" y="278" text-anchor="middle" fill="#fff" font-weight="700" font-size="10">6</text>
+            <text x="372" y="298" text-anchor="middle" font-weight="700">Râșnov</text>
+
+            <circle cx="391" cy="330" r="10" fill="#4A5A8C"></circle>
+            <text x="391" y="333" text-anchor="middle" fill="#fff" font-weight="700" font-size="10">7</text>
+            <text x="412" y="326" text-anchor="start" font-weight="700">Bucharest</text>
+            <text x="412" y="339" text-anchor="start" font-size="10.5" opacity="0.75">✈ home</text>
+          </g>
+        </svg>
+        <figcaption class="lede" data-t="mapCaption">A simplified sketch, not to scale — for the real thing, use the link below.</figcaption>
+      </figure>
+
       <a id="routeMapLink" class="maplink" target="_blank" rel="noopener" data-t="mapOpenFull">Open full route in Google Maps ↗</a>
     </section>
   </main>
@@ -511,6 +560,7 @@
     mapTitle: { en: "Route map", he: "מפת המסלול" },
     mapLede: { en: "All 7 stops, in order, pinned on Google Maps.", he: "כל 7 התחנות, בסדר, מסומנות במפות גוגל." },
     mapOpenFull: { en: "Open full route in Google Maps ↗", he: "פתיחת המסלול המלא במפות גוגל ↖" },
+    mapCaption: { en: "A simplified sketch, not to scale — for the real thing, use the link below.", he: "שרטוט פשוט, לא בקנה מידה — לשימוש אמיתי, הקישור למטה." },
     homeEyebrow: { en: "Day by day", he: "יום אחרי יום" },
     homeTitle: { en: "19 of us, 7 stops, 18 days", he: "19 נוסעים, 7 תחנות, 18 ימים" },
     homeLede: { en: "Tap a day to jump straight to that stop — reservation details, hikes by difficulty, restaurants, and family activities nearby.", he: "לחצו על יום כדי לקפוץ ישר לתחנה — פרטי הזמנה, טיולים לפי רמת קושי, מסעדות ופעילויות משפחתיות בסביבה." },
@@ -1202,9 +1252,7 @@
 
   function renderRouteMap() {
     var path = stops.map(function (s) { return encodeURIComponent(s.address); }).join("/");
-    var fullLink = "https://www.google.com/maps/dir/" + path;
-    document.getElementById("routeMapFrame").src = fullLink + "?output=embed";
-    document.getElementById("routeMapLink").href = fullLink;
+    document.getElementById("routeMapLink").href = "https://www.google.com/maps/dir/" + path;
   }
 
   function renderAll() {
