@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yudke Family — Romania 2026</title>
 <style>
   @media (prefers-reduced-motion: reduce) {
@@ -20,6 +25,12 @@
     --shadow: rgba(27, 36, 32, 0.10);
     --focus: #2F4B3C;
     --danger: #A23B2E;
+    --sky-top: #F1DFDA;
+    --sky-bottom: #EEF0E7;
+    --ridge-far: #C7D3C4;
+    --ridge-mid: #8FA890;
+    --ridge-near: #35513F;
+    --sky-orb: #FBE9CE;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -39,6 +50,12 @@
       --shadow: rgba(0, 0, 0, 0.45);
       --focus: #86C4A0;
       --danger: #E38879;
+      --sky-top: #262040;
+      --sky-bottom: #12160F;
+      --ridge-far: #3C4550;
+      --ridge-mid: #29392F;
+      --ridge-near: #101A13;
+      --sky-orb: #E9E4D8;
     }
   }
 
@@ -58,6 +75,12 @@
     --shadow: rgba(0, 0, 0, 0.45);
     --focus: #86C4A0;
     --danger: #E38879;
+    --sky-top: #262040;
+    --sky-bottom: #12160F;
+    --ridge-far: #3C4550;
+    --ridge-mid: #29392F;
+    --ridge-near: #101A13;
+    --sky-orb: #E9E4D8;
   }
 
   * { box-sizing: border-box; }
@@ -70,7 +93,24 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
+    position: relative;
   }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image:
+      repeating-radial-gradient(circle at 12% 8%, transparent 0 34px, var(--ink) 34px 35px),
+      repeating-radial-gradient(circle at 88% 55%, transparent 0 42px, var(--ink) 42px 43px),
+      repeating-radial-gradient(circle at 40% 92%, transparent 0 38px, var(--ink) 38px 39px);
+  }
+
+  .hero-banner { width: 100%; overflow: hidden; line-height: 0; }
+  .hero-banner svg { display: block; width: 100%; height: auto; }
 
   [dir="rtl"] body { font-family: "Segoe UI", Arial, "Noto Sans Hebrew", -apple-system, sans-serif; }
 
@@ -151,7 +191,7 @@
     border-bottom: 1px solid var(--border);
     padding: 14px 18px 0;
   }
-  .top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .top-row { display: flex; align-items: center; justify-content: space-between; gap: 10px 12px; margin-bottom: 12px; flex-wrap: wrap; }
   .brand { display: flex; align-items: baseline; gap: 8px; }
   .brand .mark { font-size: 1.4rem; }
   .brand h1 { font-size: 1.15rem; }
@@ -408,7 +448,16 @@
     .flight-who { max-width: 100%; text-align: start; }
     .flight-row { flex-direction: column; align-items: flex-start; gap: 4px; }
   }
+  @media (max-width: 400px) {
+    .brand h1 { font-size: 1rem; }
+    .brand .mark { font-size: 1.2rem; }
+    #langToggle, #downloadBtn { padding: 6px 11px; font-size: 0.76rem; }
+    .cal-cell .cal-day { font-size: 0.72rem; }
+    .cal-cell .cal-loc { font-size: 0.52rem; }
+  }
 </style>
+</head>
+<body>
 
 <div id="gate">
   <div class="gate-card">
@@ -422,6 +471,45 @@
 </div>
 
 <div id="app">
+  <div class="hero-banner" aria-hidden="true">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--sky-top)"></stop>
+          <stop offset="1" stop-color="var(--sky-bottom)"></stop>
+        </linearGradient>
+        <g id="pine">
+          <polygon points="0,-40 14,-16 -14,-16"></polygon>
+          <polygon points="0,-28 16,-2 -16,-2"></polygon>
+          <polygon points="0,-14 18,14 -18,14"></polygon>
+          <rect x="-3" y="14" width="6" height="9"></rect>
+        </g>
+      </defs>
+
+      <rect x="0" y="0" width="1200" height="200" fill="url(#skyGrad)"></rect>
+      <circle cx="990" cy="55" r="24" fill="var(--sky-orb)" opacity="0.9"></circle>
+
+      <path d="M0,140 C100,120 200,132 300,116 C400,100 500,122 600,112 C700,102 800,116 900,106 C1000,96 1100,112 1200,100 L1200,200 L0,200 Z"
+            fill="var(--ridge-far)" opacity="0.55"></path>
+
+      <path d="M0,168 L80,128 L150,163 L230,108 L320,158 L410,120 L500,166 L600,124 L700,168 L800,130 L900,170 L1000,128 L1100,166 L1200,140 L1200,200 L0,200 Z"
+            fill="var(--ridge-mid)" opacity="0.8"></path>
+
+      <path d="M0,198 L60,174 L110,193 L180,150 L230,188 L300,120 L340,183 L420,159 L470,193 L540,140 L600,188 L670,164 L730,198 L800,150 L860,193 L940,169 L1000,200 L1080,174 L1150,198 L1200,180 L1200,200 L0,200 Z"
+            fill="var(--ridge-near)"></path>
+      <path d="M281,132 L300,120 L319,133 L311,133 L300,124 L289,133 Z" fill="var(--paper-raised)" opacity="0.85"></path>
+
+      <g fill="var(--ridge-near)">
+        <use href="#pine" transform="translate(110,192) scale(0.55)"></use>
+        <use href="#pine" transform="translate(146,196) scale(0.4)"></use>
+        <use href="#pine" transform="translate(470,192) scale(0.62)"></use>
+        <use href="#pine" transform="translate(730,197) scale(0.5)"></use>
+        <use href="#pine" transform="translate(1000,199) scale(0.58)"></use>
+        <use href="#pine" transform="translate(1035,199) scale(0.4)"></use>
+      </g>
+    </svg>
+  </div>
+
   <header class="top">
     <div class="top-row">
       <div class="brand">
@@ -1424,3 +1512,5 @@
   wireDownloadButton();
 })();
 </script>
+</body>
+</html>
