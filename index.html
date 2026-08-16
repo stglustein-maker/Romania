@@ -728,7 +728,8 @@
     drivesLede: { en: "Every day you pack up and move to the next stop.", he: "כל יום שבו אורזים ועוברים לתחנה הבאה." },
     driveKm: { en: "km", he: "ק\"מ" },
     driveOpenMaps: { en: "Directions ↗", he: "ניווט ↖" },
-    driveStopLabel: { en: "🛑 Suggested stop along the way", he: "🛑 עצירה מומלצת בדרך" },
+    driveStopLabel: { en: "Suggested stops along the way", he: "עצירות מומלצות בדרך" },
+    driveNoStop: { en: "No stop needed — short hop.", he: "לא צריך עצירה — קפיצה קצרה." },
     savedEyebrow: { en: "Just for you", he: "רק בשבילכם" },
     savedTitle: { en: "Your saved places", he: "המקומות השמורים שלכם" },
     savedLede: { en: "Only on this device — tap the ☆ on any hike, restaurant, or activity to add it here.", he: "רק במכשיר הזה — לחצו על ה-☆ ליד כל טיול, מסעדה או פעילות כדי להוסיף אותם לכאן." },
@@ -1108,12 +1109,29 @@
 
   /* ============ DATA: driving legs between stops ============ */
   var drives = [
-    { date: "18.08.2026", from: 0, to: 1, km: "~277", duration: "~4h15m driving, no traffic (budget 6.5–7 hrs with a stop)", route: { en: "A1 motorway, then DN7 through the Olt Valley gorge via Curtea de Argeș, Râmnicu Vâlcea and Sibiu — real hill/gorge terrain, not flat highway the whole way", he: "כביש מהיר A1, ואז DN7 דרך גיא נהר אולט דרך קורטיה דה ארג'ש, ראמניקו וילצ'ה וסיביו — שטח גבעות/קניון אמיתי, לא כביש מהיר ישר כל הדרך" }, note: { en: "Worth a stop at Curtea de Argeș Monastery (30–45 min) — burial place of Romania's royal family, right on the route.", he: "שווה עצירה במנזר קורטיה דה ארג'ש (30–45 דק') — מקום קבורת המשפחה המלכותית של רומניה, ממש על הדרך." } },
-    { date: "20.08.2026", from: 1, to: 2, km: "~367", duration: "~5h50m driving, no traffic (budget 7.5–9 hrs with a stop)", route: { en: "Via Sebeș, Turda, Cluj-Napoca and the Șetref mountain pass (~810m, paved, not seasonally closed) — not via Baia Mare", he: "דרך סבש, טורדה, קלוז'-נאפוקה ומעבר שטרף (כ-810 מ', סלול, לא נסגר עונתית) — לא דרך באיה מארה" }, note: { en: "Your longest day by far. Salina Turda (Turda Salt Mine) sits right on the route with zero detour — a great weather-proof stop. Early start recommended.", he: "היום הארוך ביותר בטיול, בפער. סלינה טורדה (מכרה המלח בטורדה) ממש על הדרך בלי סטייה — עצירה טובה שלא תלויה במזג האוויר. מומלץ לצאת מוקדם." } },
-    { date: "25.08.2026", from: 2, to: 3, km: "~184", duration: "~3h35m driving, no traffic (budget 5.5–6.5 hrs with a stop)", route: { en: "Back over the Șetref Pass via Salva, Bistrița, Reghin and Praid", he: "שוב דרך מעבר שטרף, דרך סלווה, ביסטריצה, רגין ופראיד" }, note: { en: "Bistrița old town makes a good lunch stop right at the midpoint.", he: "העיר העתיקה ביסטריצה היא עצירת צהריים טובה בדיוק באמצע הדרך." } },
-    { date: "27.08.2026", from: 3, to: 4, km: "~150 direct, ~187 via Sighișoara", duration: "~2h45m direct, ~3h05m via Sighișoara (budget 5.5–6 hrs with a stop)", route: { en: "Via Sighișoara — about 20–35 min longer than the direct route, but the citadel is a genuine highlight worth it", he: "דרך סיגישוארה — כ-20–35 דק' יותר מהמסלול הישיר, אבל המצודה היא נקודת שיא אמיתית ששווה את זה" }, note: { en: "Budget a highlights-only visit (45–60 min) rather than a full exploration — cobblestones are tough on strollers and grandparents.", he: "לתכנן ביקור קצר וממוקד (45–60 דק') ולא סיור מלא — אבני הריצוף קשות לעגלות ולסבים וסבתות." } },
-    { date: "30.08.2026", from: 4, to: 5, km: "~17", duration: "~20–25 min", route: { en: "A quick local hop on DN73", he: "קפיצה מקומית קצרה בכביש DN73" }, note: { en: "The easiest day of the trip — barely a drive at all.", he: "היום הקל ביותר בטיול — כמעט ולא נסיעה." } },
-    { date: "01.09.2026", from: 5, to: 6, km: "~179", duration: "~2h45m driving, no traffic — build in a real buffer", route: { en: "Via Predeal (Romania's highest town), Sinaia, Comarnic and Ploiești — this corridor is Romania's most notorious traffic bottleneck, though a Tuesday should be lighter than a weekend", he: "דרך פרדאל (העיר הגבוהה ברומניה), סינאיה, קומרניק ופלויישט — המסלול הזה ידוע כפקק התנועה המפורסם ביותר ברומניה, אם כי ביום שלישי אמור להיות קל יותר מסופ\"ש" }, note: { en: "Peleș Castle is closed that day (Tuesdays) — Sinaia Monastery nearby is open if you want a short stop. Restaurant Palace Sinaia (4.7★, 351 reviews) is a verified good lunch option.", he: "טירת פלש סגורה באותו יום (ימי שלישי) — מנזר סינאיה הסמוך פתוח אם רוצים עצירה קצרה. מסעדת פאלאס סינאיה (4.7★, 351 ביקורות) היא אופציית צהריים מאומתת וטובה." } }
+    { date: "18.08.2026", from: 0, to: 1, km: "~277", duration: "~4h15m driving, no traffic (budget 6.5–7 hrs with a stop)", route: { en: "A1 motorway, then DN7 through the Olt Valley gorge via Curtea de Argeș, Râmnicu Vâlcea and Sibiu — real hill/gorge terrain, not flat highway the whole way", he: "כביש מהיר A1, ואז DN7 דרך גיא נהר אולט דרך קורטיה דה ארג'ש, ראמניקו וילצ'ה וסיביו — שטח גבעות/קניון אמיתי, לא כביש מהיר ישר כל הדרך" },
+      stops: [
+        { name: { en: "Curtea de Argeș Monastery", he: "מנזר קורטיה דה ארג'ש" }, meta: { en: "~30–45 min · right on the route", he: "כ-30–45 דק' · ממש על הדרך" }, desc: { en: "Burial place of Romania's royal family.", he: "מקום קבורת המשפחה המלכותית של רומניה." }, link: "https://www.google.com/maps/search/?api=1&query=Curtea+de+Arges+Monastery%2C+Romania" }
+      ] },
+    { date: "20.08.2026", from: 1, to: 2, km: "~367", duration: "~5h50m driving, no traffic (budget 7.5–9 hrs with a stop)", route: { en: "Via Sebeș, Turda, Cluj-Napoca and the Șetref mountain pass (~810m, paved, not seasonally closed) — not via Baia Mare", he: "דרך סבש, טורדה, קלוז'-נאפוקה ומעבר שטרף (כ-810 מ', סלול, לא נסגר עונתית) — לא דרך באיה מארה" },
+      stops: [
+        { name: { en: "Salina Turda (Turda Salt Mine)", he: "סלינה טורדה (מכרה המלח)" }, meta: { en: "Right on the route, zero detour", he: "ממש על הדרך, בלי סטייה" }, desc: { en: "A weather-proof stop on your longest drive — daily 9:00–18:00.", he: "עצירה שלא תלויה במזג האוויר ביום הנסיעה הארוך ביותר — פתוח יומית 9:00–18:00." }, link: "https://www.google.com/maps/search/?api=1&query=Salina+Turda%2C+Turda%2C+Romania" }
+      ] },
+    { date: "25.08.2026", from: 2, to: 3, km: "~184", duration: "~3h35m driving, no traffic (budget 5.5–6.5 hrs with a stop)", route: { en: "Back over the Șetref Pass via Salva, Bistrița, Reghin and Praid", he: "שוב דרך מעבר שטרף, דרך סלווה, ביסטריצה, רגין ופראיד" },
+      stops: [
+        { name: { en: "Bistrița Old Town", he: "העיר העתיקה ביסטריצה" }, meta: { en: "Right at the midpoint", he: "בדיוק באמצע הדרך" }, desc: { en: "A good lunch stop — main square and the Cock's Tower church.", he: "עצירת צהריים טובה — הכיכר הראשית וכנסיית מגדל התרנגול." }, link: "https://www.google.com/maps/search/?api=1&query=Bistrita+Old+Town%2C+Romania" }
+      ] },
+    { date: "27.08.2026", from: 3, to: 4, km: "~150 direct, ~187 via Sighișoara", duration: "~2h45m direct, ~3h05m via Sighișoara (budget 5.5–6 hrs with a stop)", route: { en: "Via Sighișoara — about 20–35 min longer than the direct route, but the citadel is a genuine highlight worth it", he: "דרך סיגישוארה — כ-20–35 דק' יותר מהמסלול הישיר, אבל המצודה היא נקודת שיא אמיתית ששווה את זה" },
+      stops: [
+        { name: { en: "Sighișoara Citadel", he: "מצודת סיגישוארה" }, meta: { en: "~45–60 min · highlights only", he: "כ-45–60 דק' · רק עיקרי הדברים" }, desc: { en: "UNESCO medieval citadel — a genuine highlight. Cobblestones are tough on strollers and grandparents, so keep it brief.", he: "מצודה מימי הביניים באונסק\"ו — נקודת שיא אמיתית. אבני הריצוף קשות לעגלות ולסבים וסבתות, אז כדאי לשמור על ביקור קצר." }, link: "https://www.google.com/maps/search/?api=1&query=Sighisoara+Citadel%2C+Romania" }
+      ] },
+    { date: "30.08.2026", from: 4, to: 5, km: "~17", duration: "~20–25 min", route: { en: "A quick local hop on DN73 — the easiest day of the trip, barely a drive at all", he: "קפיצה מקומית קצרה בכביש DN73 — היום הקל ביותר בטיול, כמעט ולא נסיעה" },
+      stops: [] },
+    { date: "01.09.2026", from: 5, to: 6, km: "~179", duration: "~2h45m driving, no traffic — build in a real buffer", route: { en: "Via Predeal (Romania's highest town), Sinaia, Comarnic and Ploiești — this corridor is Romania's most notorious traffic bottleneck, though a Tuesday should be lighter than a weekend", he: "דרך פרדאל (העיר הגבוהה ברומניה), סינאיה, קומרניק ופלויישט — המסלול הזה ידוע כפקק התנועה המפורסם ביותר ברומניה, אם כי ביום שלישי אמור להיות קל יותר מסופ\"ש" },
+      stops: [
+        { name: { en: "Sinaia Monastery", he: "מנזר סינאיה" }, meta: { en: "Open daily except Monday, 10:00–16:00, 5 RON", he: "פתוח מדי יום חוץ מיום שני, 10:00–16:00, 5 לֵי" }, desc: { en: "Peleș Castle is closed that exact day (Tuesdays) — this is the alternative short stop nearby.", he: "טירת פלש סגורה בדיוק באותו יום (ימי שלישי) — זו עצירת החלופה הקצרה בסביבה." }, link: "https://www.google.com/maps/search/?api=1&query=Sinaia+Monastery%2C+Romania" },
+        { name: { en: "Restaurant Palace Sinaia", he: "מסעדת פאלאס סינאיה" }, meta: { en: "4.7★, 351 reviews", he: "4.7★, 351 ביקורות" }, desc: { en: "A verified good lunch option right in Sinaia.", he: "אופציית צהריים מאומתת וטובה ממש בסינאיה." }, link: "https://www.google.com/maps/search/?api=1&query=Restaurant+Palace+Sinaia%2C+Romania" }
+      ] }
   ];
 
   /* ============ DATA: packing ============ */
@@ -1548,15 +1566,19 @@
     if (!container) return;
     container.innerHTML = drives.map(function (d) {
       var fromStop = stops[d.from], toStop = stops[d.to];
-      var noteHtml = tf(d.note)
-        ? '<div class="drive-stop"><span class="stop-label">' + t("driveStopLabel") + '</span>' + tf(d.note) + "</div>"
-        : "";
+      var stopsHtml = '<div class="drive-stop"><span class="stop-label">' + t("driveStopLabel") + "</span>" +
+        (d.stops && d.stops.length
+          ? d.stops.map(function (st) {
+              return '<div class="reco"><div class="name">' + nameHtml(st) + '</div><div class="meta">' + tf(st.meta) + '</div><div class="desc">' + tf(st.desc) + "</div></div>";
+            }).join("")
+          : '<p class="desc" style="padding:6px 0 0;">' + t("driveNoStop") + "</p>") +
+        "</div>";
       return '<div class="drive-card">' +
         '<div class="drive-head"><span class="drive-route">' + tf(fromStop.short) + " → " + tf(toStop.short) + "</span>" +
         '<span class="drive-date num">' + d.date + "</span></div>" +
         '<div class="drive-meta"><span><b>' + d.km + "</b> " + t("driveKm") + "</span><span><b>" + d.duration + "</b></span></div>" +
         '<p class="drive-note">' + tf(d.route) + "</p>" +
-        noteHtml +
+        stopsHtml +
         '<a class="maplink" target="_blank" rel="noopener" href="' + dirUrl(fromStop.address, toStop.address) + '">' + t("driveOpenMaps") + "</a>" +
         "</div>";
     }).join("");
