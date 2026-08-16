@@ -363,6 +363,20 @@
   .near-btn:hover { border-color: var(--forest); }
   .near-btn:disabled { opacity: 0.6; cursor: default; }
 
+  .drive-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .drive-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .drive-route { font-weight: 800; font-size: 0.98rem; }
+  .drive-date { font-size: 0.78rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .drive-meta { display: flex; gap: 14px; margin: 6px 0; font-size: 0.84rem; color: var(--ink-soft); flex-wrap: wrap; }
+  .drive-meta b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .drive-note { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 8px; }
+
   .flag-box {
     background: var(--rust-soft);
     border: 1px solid var(--rust);
@@ -617,6 +631,15 @@
     </section>
   </main>
 
+  <main class="view" data-view="drives">
+    <section class="block">
+      <p class="eyebrow" data-t="drivesEyebrow">Getting between stops</p>
+      <h2 data-t="drivesTitle">The 6 driving days</h2>
+      <p class="lede" data-t="drivesLede">Every day you pack up and move to the next stop.</p>
+      <div id="drivesList"></div>
+    </section>
+  </main>
+
   <main class="view" data-view="flights">
     <section class="block">
       <p class="eyebrow" data-t="flightsEyebrow">Getting there and back</p>
@@ -680,7 +703,13 @@
     navFlights: { en: "Flights", he: "טיסות" },
     navPacking: { en: "Packing", he: "ציוד" },
     navMap: { en: "Map", he: "מפה" },
+    navDrives: { en: "Drives", he: "נסיעות" },
     navSaved: { en: "Saved", he: "שמורים" },
+    drivesEyebrow: { en: "Getting between stops", he: "מעבר בין תחנות" },
+    drivesTitle: { en: "The 6 driving days", he: "6 ימי הנסיעה" },
+    drivesLede: { en: "Every day you pack up and move to the next stop.", he: "כל יום שבו אורזים ועוברים לתחנה הבאה." },
+    driveKm: { en: "km", he: "ק\"מ" },
+    driveOpenMaps: { en: "Directions ↗", he: "ניווט ↖" },
     savedEyebrow: { en: "Just for you", he: "רק בשבילכם" },
     savedTitle: { en: "Your saved places", he: "המקומות השמורים שלכם" },
     savedLede: { en: "Only on this device — tap the ☆ on any hike, restaurant, or activity to add it here.", he: "רק במכשיר הזה — לחצו על ה-☆ ליד כל טיול, מסעדה או פעילות כדי להוסיף אותם לכאן." },
@@ -787,6 +816,7 @@
 
   /* ============ DATA: itinerary stops ============ */
   function addr(a) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(a); }
+  function dirUrl(fromA, toA) { return "https://www.google.com/maps/dir/" + encodeURIComponent(fromA) + "/" + encodeURIComponent(toA); }
 
   var stops = [
     {
@@ -1056,6 +1086,16 @@
     }
   ];
 
+  /* ============ DATA: driving legs between stops ============ */
+  var drives = [
+    { date: "18.08.2026", from: 0, to: 1, km: "~258", duration: "~4 hrs driving (budget 6.5–7 hrs with a stop)", route: { en: "A1 then DN7 via Curtea de Argeș, Râmnicu Vâlcea and Sibiu — part of the A1 isn't finished yet, so some of this is winding national road", he: "A1 ואז DN7 דרך קורטיה דה ארג'ש, ראמניקו וילצ'ה וסיביו — חלק מ-A1 עדיין לא גמור, אז חלק מהדרך היא כביש ארצי מפותל" }, note: { en: "Worth a stop at Curtea de Argeș Monastery (30–45 min) — burial place of Romania's royal family, right on the route.", he: "שווה עצירה במנזר קורטיה דה ארג'ש (30–45 דק') — מקום קבורת המשפחה המלכותית של רומניה, ממש על הדרך." } },
+    { date: "20.08.2026", from: 1, to: 2, km: "~290–320", duration: "~5–5.5 hrs driving (budget 7.5–9 hrs with a stop)", route: { en: "Via Cluj-Napoca, Dej, Bistrița-Năsăud and the Șetref Pass — not via Baia Mare", he: "דרך קלוז'-נאפוקה, דז', ביסטריצה-נסאוד ומעבר שטרף — לא דרך באיה מארה" }, note: { en: "Salina Turda (Turda Salt Mine) is right on the route with zero detour — a great weather-proof stop on your longest drive.", he: "סלינה טורדה (מכרה המלח בטורדה) ממש על הדרך בלי סטייה — עצירה טובה שלא תלויה במזג האוויר ביום הנסיעה הארוך ביותר." } },
+    { date: "25.08.2026", from: 2, to: 3, km: "~185–190", duration: "~4.5–5 hrs driving (budget 6.5–7.5 hrs with a stop)", route: { en: "Via the Șetref Pass, Salva, Bistrița and Reghin — 65–70km shorter and faster than going via Borșa/Prislop Pass", he: "דרך מעבר שטרף, סלווה, ביסטריצה ורגין — קצר ומהיר ב-65–70 ק\"מ מהנסיעה דרך בורשה/פרסלופ" }, note: { en: "Bistrița old town makes a good lunch stop right at the midpoint.", he: "העיר העתיקה ביסטריצה היא עצירת צהריים טובה בדיוק באמצע הדרך." } },
+    { date: "27.08.2026", from: 3, to: 4, km: "~187", duration: "~3 hrs driving (budget 6–6.5 hrs with a stop)", route: { en: "Via Sighișoara — about 35–40 min longer than the direct route, but the citadel is a genuine highlight worth it", he: "דרך סיגישוארה — כ-35–40 דק' יותר מהמסלול הישיר, אבל המצודה היא נקודת שיא אמיתית ששווה את זה" }, note: { en: "Budget a highlights-only visit (45–60 min) rather than a full exploration — cobblestones are tough on strollers and grandparents.", he: "לתכנן ביקור קצר וממוקד (45–60 דק') ולא סיור מלא — אבני הריצוף קשות לעגלות ולסבים וסבתות." } },
+    { date: "30.08.2026", from: 4, to: 5, km: "~18", duration: "~20 min", route: { en: "A quick local hop on DN73", he: "קפיצה מקומית קצרה בכביש DN73" }, note: { en: "The easiest day of the trip — barely a drive at all.", he: "היום הקל ביותר בטיול — כמעט ולא נסיעה." } },
+    { date: "01.09.2026", from: 5, to: 6, km: "~163", duration: "~2.5–3 hrs (only the last stretch is real motorway)", route: { en: "Via Predeal, Sinaia, Comarnic and Ploiești", he: "דרך פרדאל, סינאיה, קומרניק ופלויישט" }, note: { en: "Peleș Castle is closed that day (Tuesdays) — Sinaia Monastery nearby is open if you want a short stop. Restaurant Palace Sinaia (4.7★, 351 reviews) is a verified good lunch option.", he: "טירת פלש סגורה באותו יום (ימי שלישי) — מנזר סינאיה הסמוך פתוח אם רוצים עצירה קצרה. מסעדת פאלאס סינאיה (4.7★, 351 ביקורות) היא אופציית צהריים מאומתת וטובה." } }
+  ];
+
   /* ============ DATA: packing ============ */
   var packBase = [
     { en: "Underwear", he: "תחתונים" },
@@ -1132,6 +1172,7 @@
   var tabDefs = [
     { id: "home", labelKey: "navHome" },
     { id: "map", labelKey: "navMap" },
+    { id: "drives", labelKey: "navDrives" },
     { id: "flights", labelKey: "navFlights" },
     { id: "packing", labelKey: "navPacking" },
     { id: "saved", labelKey: "navSaved" }
@@ -1482,6 +1523,23 @@
     });
   }
 
+  function renderDrives() {
+    var container = document.getElementById("drivesList");
+    if (!container) return;
+    container.innerHTML = drives.map(function (d) {
+      var fromStop = stops[d.from], toStop = stops[d.to];
+      var noteHtml = tf(d.note) ? '<p class="drive-note">' + tf(d.note) + "</p>" : "";
+      return '<div class="drive-card">' +
+        '<div class="drive-head"><span class="drive-route">' + tf(fromStop.short) + " → " + tf(toStop.short) + "</span>" +
+        '<span class="drive-date num">' + d.date + "</span></div>" +
+        '<div class="drive-meta"><span><b>' + d.km + "</b> " + t("driveKm") + "</span><span><b>" + d.duration + "</b></span></div>" +
+        '<p class="drive-note">' + tf(d.route) + "</p>" +
+        noteHtml +
+        '<a class="maplink" target="_blank" rel="noopener" href="' + dirUrl(fromStop.address, toStop.address) + '">' + t("driveOpenMaps") + "</a>" +
+        "</div>";
+    }).join("");
+  }
+
   function renderRouteMap() {
     var path = stops.map(function (s) { return encodeURIComponent(s.address); }).join("/");
     document.getElementById("routeMapLink").href = "https://www.google.com/maps/dir/" + path;
@@ -1563,6 +1621,7 @@
     renderRouteMap();
     renderNear();
     renderSavedList();
+    renderDrives();
   }
 
   document.getElementById("langToggle").addEventListener("click", function () {
