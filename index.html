@@ -406,7 +406,12 @@
 
   .reco { padding: 10px 0; border-bottom: 1px solid var(--border); }
   .reco:last-child { border-bottom: none; }
-  .reco .name { font-weight: 700; font-size: 0.92rem; }
+  .reco .name { font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; gap: 6px; }
+  .save-star {
+    border: none; background: transparent; color: var(--ink-faint);
+    font-size: 1.15rem; line-height: 1; cursor: pointer; padding: 0; flex: none;
+  }
+  .save-star.saved { color: var(--rust); }
   .reco .name a, .prop-link { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
   .reco .name a:hover, .prop-link:hover { border-bottom-style: solid; }
   .reco .meta { color: var(--ink-faint); font-size: 0.76rem; margin: 2px 0 4px; }
@@ -628,6 +633,15 @@
     </section>
   </main>
 
+  <main class="view" data-view="saved">
+    <section class="block">
+      <p class="eyebrow" data-t="savedEyebrow">Just for you</p>
+      <h2 data-t="savedTitle">Your saved places</h2>
+      <p class="lede" data-t="savedLede">Only on this device — tap the ☆ on any hike, restaurant, or activity to add it here.</p>
+      <div id="savedList"></div>
+    </section>
+  </main>
+
   <main class="view" data-view="packing">
     <section class="block">
       <p class="eyebrow" data-t="packEyebrow">Pack smart</p>
@@ -666,6 +680,11 @@
     navFlights: { en: "Flights", he: "טיסות" },
     navPacking: { en: "Packing", he: "ציוד" },
     navMap: { en: "Map", he: "מפה" },
+    navSaved: { en: "Saved", he: "שמורים" },
+    savedEyebrow: { en: "Just for you", he: "רק בשבילכם" },
+    savedTitle: { en: "Your saved places", he: "המקומות השמורים שלכם" },
+    savedLede: { en: "Only on this device — tap the ☆ on any hike, restaurant, or activity to add it here.", he: "רק במכשיר הזה — לחצו על ה-☆ ליד כל טיול, מסעדה או פעילות כדי להוסיף אותם לכאן." },
+    savedEmpty: { en: "Nothing saved yet — go tap some stars.", he: "עדיין לא שמרתם כלום — לכו ללחוץ על כמה כוכבים." },
     mapEyebrow: { en: "The whole route", he: "כל המסלול" },
     mapTitle: { en: "Route map", he: "מפת המסלול" },
     mapLede: { en: "All 7 stops, in order, pinned on Google Maps.", he: "כל 7 התחנות, בסדר, מסומנות במפות גוגל." },
@@ -803,10 +822,12 @@
         ],
         medium: [
           { name: { en: "Șerbota Waterfall", he: "מפל שרבוטה" }, meta: { en: "~3–4 hrs round trip · starts in village", he: "3–4 שעות הלוך ושוב · מתחיל בכפר" }, desc: { en: "One of the most impressive waterfalls in the Carpathians — turn back at the falls.", he: "אחד המפלים המרשימים ביותר בקרפטים — חוזרים אחרי המפל." }, link: "https://www.alltrails.com/trail/romania/sibiu/cabana-barcaciu-v-erbota-cabana-negoiu" },
-          { name: { en: "Bâlea Lac viewpoint walks", he: "טיולי תצפית מאגם בלאה" }, meta: { en: "~1–2 hrs round trip", he: "1–2 שעות הלוך ושוב" }, desc: { en: "Alpine views without a full ridge hike — a good starter mountain walk for teens.", he: "נוף אלפיני בלי טרק רכס מלא — טיול הרים ראשוני טוב לבני נוער." }, link: "https://www.alltrails.com/poi/romania/sibiu/car-i-oara/lacul-balea" }
+          { name: { en: "Bâlea Lac viewpoint walks", he: "טיולי תצפית מאגם בלאה" }, meta: { en: "~1–2 hrs round trip", he: "1–2 שעות הלוך ושוב" }, desc: { en: "Alpine views without a full ridge hike — a good starter mountain walk for teens.", he: "נוף אלפיני בלי טרק רכס מלא — טיול הרים ראשוני טוב לבני נוער." }, link: "https://www.alltrails.com/poi/romania/sibiu/car-i-oara/lacul-balea" },
+          { name: { en: "Stâna Canyon (near Vidraru)", he: "קניון סטינה (ליד וידרארו)" }, meta: { en: "~1.5–2 hrs · combine with a Vidraru day", he: "1.5–2 שעות · לשלב עם יום בוידרארו" }, desc: { en: "A fun canyon scramble with light via-ferrata-style sections — good for adventurous teens.", he: "טיפוס קניון כיפי עם קטעי \"ויה פראטה\" קלים — טוב לבני נוער הרפתקנים." } }
         ],
         hard: [
-          { name: { en: "Cabana Negoiu route", he: "מסלול לקבינת נגויו" }, meta: { en: "~16km, 4–5 hrs one way · 800m gain", he: "כ-16 ק\"מ, 4–5 שעות לכיוון אחד · עלייה של 800 מ'" }, desc: { en: "The classic Făgăraș approach trail, right from the village.", he: "מסלול הגישה הקלאסי להרי פגרש, ישר מהכפר." }, link: "https://www.outdooractive.com/en/route/hiking-trail/transilvania/fagaras-stage-1-porumbacu-de-sus-cabana-negoiu/24229701/" }
+          { name: { en: "Cabana Negoiu route", he: "מסלול לקבינת נגויו" }, meta: { en: "~16km, 4–5 hrs one way · 800m gain", he: "כ-16 ק\"מ, 4–5 שעות לכיוון אחד · עלייה של 800 מ'" }, desc: { en: "The classic Făgăraș approach trail, right from the village.", he: "מסלול הגישה הקלאסי להרי פגרש, ישר מהכפר." }, link: "https://www.outdooractive.com/en/route/hiking-trail/transilvania/fagaras-stage-1-porumbacu-de-sus-cabana-negoiu/24229701/" },
+          { name: { en: "Bâlea Lac → Podragu ridge traverse", he: "מסלול רכס בלאה לק — פודרגו" }, meta: { en: "~8km, 5–6 hrs one way · experienced hikers only", he: "כ-8 ק\"מ, 5–6 שעות לכיוון אחד · למטיילים מנוסים בלבד" }, desc: { en: "A real alpine ridge walk with no bail-out points — only for very fit, experienced hikers in stable weather.", he: "מסלול רכס אלפיני אמיתי בלי נקודות יציאה — רק למטיילים מנוסים וכשירים במיוחד במזג אוויר יציב." } }
         ]
       },
       restaurants: [
@@ -818,7 +839,9 @@
         { name: { en: "Clay Fairy-Tale Castle", he: "טירת החימר" }, meta: { en: "In the village", he: "בכפר עצמו" }, desc: { en: "A whimsical hand-built clay castle with 10 rooms — right where you're staying.", he: "טירת חימר קסומה בעבודת יד עם 10 חדרים — ממש ליד מקום הלינה." }, link: "https://www.casteluldelut.ro/" },
         { name: { en: "Bâlea Lake cable car", he: "רכבל אגם בלאה" }, meta: { en: "~45–70 min drive to base", he: "כ-45–70 דק' נסיעה לתחנה" }, desc: { en: "15-minute ride up to a 2,034m glacier lake — no hard walking needed.", he: "רכבל של 15 דקות עד לאגם קרחוני בגובה 2,034 מ' — בלי הליכה מאומצת." }, link: "https://he.wikipedia.org/wiki/אגם_בליה" },
         { name: { en: "Vidraru Dam + Poenari Castle", he: "סכר וידרארו וטירת פואנרי" }, meta: { en: "~2.5–3 hrs one way, full day", he: "כ-2.5–3 שעות לכיוון אחד, יום שלם" }, desc: { en: "Dramatic dam plus Vlad the Impaler's fortress (1,480 steps) — best as a day trip for the fitter half of the group.", he: "סכר מרשים וטירת ולאד המשפד (1,480 מדרגות) — מומלץ כטיול יום לחלק הכשיר יותר של הקבוצה." }, link: "https://www.tripadvisor.com/AttractionProductReview-g294458-d19806919-Private_tour_to_Poenari_Citadel_Vidraru_Dam_Arges_Monastery-Bucharest.html" },
-        { name: { en: "Sibiu Zoo & Aqua Park", he: "גן החיות ופארק המים בסיביו" }, meta: { en: "~45 min", he: "כ-45 דק'" }, desc: { en: "A cheap, easy pairing for toddlers through teens.", he: "צירוף זול ונוח לפעוטות עד בני נוער." }, link: "https://www.zoosibiu.ro/" }
+        { name: { en: "Sibiu Zoo & Aqua Park", he: "גן החיות ופארק המים בסיביו" }, meta: { en: "~45 min", he: "כ-45 דק'" }, desc: { en: "A cheap, easy pairing for toddlers through teens.", he: "צירוף זול ונוח לפעוטות עד בני נוער." }, link: "https://www.zoosibiu.ro/" },
+        { name: { en: "Arka Park Păltiniș", he: "ארקה פארק פלטיניש" }, meta: { en: "~50–60 min · ages ~8+", he: "כ-50–60 דק' · מגיל 8 בערך" }, desc: { en: "Zip-line/treetop adventure circuits through the forest — good for older kids and teens.", he: "מסלולי הרפתקאות על עצים וזיפליין ביער — טוב לילדים גדולים ובני נוער." } },
+        { name: { en: "Rafting/kayaking on the Olt River", he: "ראפטינג/קיאקים בנהר אולט" }, meta: { en: "~20–30 min, Racovița area", he: "כ-20–30 דק', אזור רקוביצה" }, desc: { en: "Gentle, family-friendly rafting and canoe rides — a nice change of pace from hiking.", he: "ראפטינג וסירות קאנו רגועים ומתאימים למשפחות — הפסקה נעימה מהטיולים." } }
       ]
     },
     {
@@ -842,7 +865,8 @@
           { name: { en: "Iezer Lake (turnaround)", he: "אגם איזר (חזרה מהאגם)" }, meta: { en: "~16km round trip, 5–6 hrs", he: "16 ק\"מ הלוך ושוב, 5–6 שעות" }, desc: { en: "A glacial lake at 1,800m — go as far as the lake and turn back while stronger hikers push to the summit.", he: "אגם קרחוני בגובה 1,800 מ' — הולכים עד האגם וחוזרים, בעוד המטיילים החזקים ממשיכים לפסגה." }, link: "https://www.outdooractive.ro/ro/poi/maramures/lacul-iezer-iezerul-pietrosului-/62156665/" }
         ],
         hard: [
-          { name: { en: "Pietrosul Rodnei Peak (2,303m)", he: "פסגת פייטרוסול רודנה (2,303 מ')" }, meta: { en: "~16km round trip, 7.5–10 hrs", he: "16 ק\"מ הלוך ושוב, 7.5–10 שעות" }, desc: { en: "The highest peak of the Rodna Mountains — a real full-day mountain day.", he: "הפסגה הגבוהה בהרי רודנה — יום הרים מלא ואמיתי." }, link: "https://www.alltrails.com/trail/romania/maramures/pietrosul-rodnei" }
+          { name: { en: "Pietrosul Rodnei Peak (2,303m)", he: "פסגת פייטרוסול רודנה (2,303 מ')" }, meta: { en: "~16km round trip, 7.5–10 hrs", he: "16 ק\"מ הלוך ושוב, 7.5–10 שעות" }, desc: { en: "The highest peak of the Rodna Mountains — a real full-day mountain day.", he: "הפסגה הגבוהה בהרי רודנה — יום הרים מלא ואמיתי." }, link: "https://www.alltrails.com/trail/romania/maramures/pietrosul-rodnei" },
+          { name: { en: "Toroiaga Peak from Prislop Pass", he: "פסגת טוריאגה מפרסלופ" }, meta: { en: "~19km round trip, 8.5–11 hrs", he: "כ-19 ק\"מ הלוך ושוב, 8.5–11 שעות" }, desc: { en: "A longer, quieter alternative to Pietrosul along the Maramureș ridge — good trail, serious time commitment.", he: "אלטרנטיבה ארוכה ושקטה יותר לפייטרוסול לאורך רכס מרמורש — מסלול טוב, דורש זמן רב." } }
         ]
       },
       restaurants: [
@@ -854,7 +878,9 @@
         { name: { en: "Mocănița steam train", he: "רכבת הקיטור מוצ'ניצה" }, meta: { en: "Vișeu de Sus, ~20 min · book ahead", he: "ויסאו דה סוס, כ-20 דק' · להזמין מראש" }, desc: { en: "A historic narrow-gauge forestry train up the Vaser Valley — full round trip ~6 hours. Sells out, book online.", he: "רכבת יער היסטורית צרת מסילה בעמק ואסר — סיבוב מלא כ-6 שעות. נגמר מהר, להזמין באינטרנט מראש." }, link: "https://www.lametayel.co.il/pois/q2dvn" },
         { name: { en: "Merry Cemetery, Săpânța", he: "בית הקברות העליז, סאפנצה" }, meta: { en: "~1h45–2h, full day trip", he: "כ-1:45–2 שעות, טיול יום שלם" }, desc: { en: "Famous colorful, hand-carved grave crosses — combine with Sighetu Marmației on the way.", he: "צלבי קבר צבעוניים ומעוצבים בעבודת יד — לשלב עם סיגטו מרמציאיי בדרך." }, link: "https://en.wikipedia.org/wiki/Merry_Cemetery" },
         { name: { en: "Bârsana Monastery (UNESCO)", he: "מנזר ברסנה (אונסק\"ו)" }, meta: { en: "~49 min", he: "כ-49 דק'" }, desc: { en: "The most visually spectacular of the wooden church complexes — easy walking grounds, craft stalls.", he: "המרשים ביותר מבין מתחמי כנסיות העץ — שטח הליכה נוח, דוכני מלאכת יד." }, link: "https://www.lametayel.co.il/pois/q29gl" },
-        { name: { en: "Telegondola Borșa cable car", he: "רכבל בורשה" }, meta: { en: "~15–20 min", he: "כ-15–20 דק'" }, desc: { en: "Year-round gondola, easy mountain views for grandparents and toddlers alike.", he: "רכבל פעיל כל השנה, נוף הררי נוח לסבים וסבתות ולפעוטות כאחד." }, link: "https://skiborsa.eu/telegondola-borsa/" }
+        { name: { en: "Telegondola Borșa cable car", he: "רכבל בורשה" }, meta: { en: "~15–20 min", he: "כ-15–20 דק'" }, desc: { en: "Year-round gondola, easy mountain views for grandparents and toddlers alike.", he: "רכבל פעיל כל השנה, נוף הררי נוח לסבים וסבתות ולפעוטות כאחד." }, link: "https://skiborsa.eu/telegondola-borsa/" },
+        { name: { en: "Ieud Hill Church", he: "כנסיית העץ ביעוד" }, meta: { en: "~30–40 min", he: "כ-30–40 דק'" }, desc: { en: "One of Europe's oldest wooden churches — smaller and quicker to visit than Bârsana.", he: "אחת מכנסיות העץ העתיקות באירופה — קטנה ומהירה יותר לביקור מברסנה." } },
+        { name: { en: "Prislop Pass", he: "מעבר פרסלופ" }, meta: { en: "~40–45 min", he: "כ-40–45 דק'" }, desc: { en: "Scenic 1,416m mountain pass with roadside craft stalls and panoramic viewpoints — a good scenic-drive stop.", he: "מעבר הררי נופי בגובה 1,416 מ' עם דוכני מלאכת יד ותצפיות פנורמיות — עצירה נופית טובה." } }
       ]
     },
     {
@@ -873,7 +899,8 @@
           { name: { en: "Tivoli Lake walk", he: "טיילת אגם טיבולי" }, meta: { en: "~1–1.5 mi loop, ~30 min", he: "כ-1.5–2.5 ק\"מ, כ-30 דק'" }, desc: { en: "A calmer freshwater lake near the adventure park — good for a picnic.", he: "אגם מים מתוקים שקט יותר, ליד פארק ההרפתקאות — טוב לפיקניק." }, link: "https://visitmures.com/en/sovata/outdoor/hiking-and-trails/tourist-alley-tivoli-sovata" }
         ],
         medium: [
-          { name: { en: "Creasta Stejarului ridge loop", he: "מסלול רכס קרסטה סטיז'רולוי" }, meta: { en: "~7.7km, 2.5–3 hrs, ~310m gain", he: "כ-7.7 ק\"מ, 2.5–3 שעות, עלייה כ-310 מ'" }, desc: { en: "A wooded ridge loop above town — for teens and fit adults, too long for toddlers.", he: "מסלול רכס מיוער מעל העיר — לבני נוער ומבוגרים כשירים, ארוך מדי לפעוטות." }, link: "https://www.alltrails.com/trail/romania/mures/sovata-gara-mica-creasta-stejarului-sovata-centru" }
+          { name: { en: "Creasta Stejarului ridge loop", he: "מסלול רכס קרסטה סטיז'רולוי" }, meta: { en: "~7.7km, 2.5–3 hrs, ~310m gain", he: "כ-7.7 ק\"מ, 2.5–3 שעות, עלייה כ-310 מ'" }, desc: { en: "A wooded ridge loop above town — for teens and fit adults, too long for toddlers.", he: "מסלול רכס מיוער מעל העיר — לבני נוער ומבוגרים כשירים, ארוך מדי לפעוטות." }, link: "https://www.alltrails.com/trail/romania/mures/sovata-gara-mica-creasta-stejarului-sovata-centru" },
+          { name: { en: "Via Transilvanica (Sovata–Praid stretch)", he: "ויה טרנסילבניקה (קטע סובאטה–פראיד)" }, meta: { en: "~15km point-to-point — do it as a there-and-back", he: "כ-15 ק\"מ מנקודה לנקודה — ללכת הלוך ושוב" }, desc: { en: "Part of Romania's long-distance trail — scenic, best as a partial walk rather than the full stretch.", he: "חלק ממסלול ההליכה הארוך של רומניה — נופי, עדיף כהליכה חלקית ולא המסלול המלא." } }
         ],
         hard: [
           { name: { en: "Vârful Saca Mare (1,776m)", he: "פסגת סאקה מארה (1,776 מ')" }, meta: { en: "Full-day mountain hike, ~20–25 min to trailhead", he: "טיול הרים ליום שלם, כ-20–25 דק' לתחילת המסלול" }, desc: { en: "The highest peak of the Gurghiu Mountains — for fit adults/teens only.", he: "הפסגה הגבוהה בהרי גורגיו — למבוגרים ובני נוער כשירים בלבד." }, link: "https://www.alltrails.com/trail/romania/mures/sovata-centru-valea-sebe-ului-vf-saca-mare" }
@@ -887,7 +914,8 @@
       activities: [
         { name: { en: "Lacul Ursu salt lake", he: "אגם המלח אורסו" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "The world's largest heliothermal salt lake — surface water up to 35°C, floats you effortlessly. Works for every age.", he: "אגם המלח ההליותרמי הגדול בעולם — מים חמים עד 35° בשכבה העליונה, מרחפים בלי מאמץ. מתאים לכל גיל." }, link: "https://www.lametayel.co.il/tips/n827jv" },
         { name: { en: "Aqua Beach Praid", he: "אקווה ביץ' פראיד" }, meta: { en: "~10–15 min", he: "כ-10–15 דק'" }, desc: { en: "An open water park — the good substitute now that the Praid salt mine is closed. Mini aqua park for kids, heated pools.", he: "פארק מים פתוח — התחליף הטוב עכשיו כשמכרה המלח בפראיד סגור. פארק מים מיני לילדים, בריכות מחוממות." }, link: "https://visit-praid.ro/directorie/aqua-beach/" },
-        { name: { en: "Corund pottery village", he: "כפר הקרמיקה קורונד" }, meta: { en: "~20–25 min", he: "כ-20–25 דק'" }, desc: { en: "Pottery-painting and craft activities — a good easy half-day stop.", he: "צביעת קרמיקה ופעילויות מלאכת יד — חצי יום קל ונעים." }, link: "https://visitharghita.com/en/places/corund-pottery-rh99p3rpf5tjxa" }
+        { name: { en: "Corund pottery village", he: "כפר הקרמיקה קורונד" }, meta: { en: "~20–25 min", he: "כ-20–25 דק'" }, desc: { en: "Pottery-painting and craft activities — a good easy half-day stop.", he: "צביעת קרמיקה ופעילויות מלאכת יד — חצי יום קל ונעים." }, link: "https://visitharghita.com/en/places/corund-pottery-rh99p3rpf5tjxa" },
+        { name: { en: "Ensana Sovata spa", he: "ספא אנסנה סובאטה" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "Mineral pools, saunas and mud treatments — a good relaxed option for grandparents on a lower-key day.", he: "בריכות מינרלים, סאונות וטיפולי בוץ — אופציה נינוחה לסבים וסבתות ביום רגוע." } }
       ],
       flags: [ { en: "Salina Praid (the underground salt mine) has been closed since a 2025 flood, with no confirmed reopening date. Aqua Beach Praid (above) is the open substitute.", he: "מכרה המלח פראיד (סלינה פראיד) סגור מאז שיטפון ב-2025, ללא תאריך פתיחה ידוע. אקווה ביץ' פראיד (למעלה) הוא התחליף הפתוח." } ]
     },
@@ -911,7 +939,8 @@
           { name: { en: "Zărnești Gorge", he: "קניון זרנשטי" }, meta: { en: "~2–3 hrs round trip · ~30–35 min drive", he: "2–3 שעות הלוך ושוב · כ-30–35 דק' נסיעה" }, desc: { en: "A narrow limestone canyon on a gravel path — the manageable version of Piatra Craiului.", he: "קניון גיר צר על שביל חצץ — הגרסה הנוחה של פייטרה קריולוי." }, link: "https://www.alltrails.com/trail/romania/brasov/prapastiile-zarne-tiului" }
         ],
         hard: [
-          { name: { en: "Seven Ladders Canyon", he: "קניון שבע הסולמות" }, meta: { en: "~2h40 total · ~15–20 min drive", he: "כ-2:40 שעות בסך הכל · כ-15–20 דק' נסיעה" }, desc: { en: "Metal ladders past 7 waterfalls — not for kids under 7–8 or anyone uneasy with heights.", he: "סולמות מתכת לצד 7 מפלים — לא לילדים מתחת לגיל 7–8 או למי שחושש מגובה." }, link: "https://www.alltrails.com/trail/romania/brasov/canionul-7-scari" }
+          { name: { en: "Seven Ladders Canyon", he: "קניון שבע הסולמות" }, meta: { en: "~2h40 total · ~15–20 min drive", he: "כ-2:40 שעות בסך הכל · כ-15–20 דק' נסיעה" }, desc: { en: "Metal ladders past 7 waterfalls — not for kids under 7–8 or anyone uneasy with heights.", he: "סולמות מתכת לצד 7 מפלים — לא לילדים מתחת לגיל 7–8 או למי שחושש מגובה." }, link: "https://www.alltrails.com/trail/romania/brasov/canionul-7-scari" },
+          { name: { en: "Zărnești Gorge → Curmătura Hut loop", he: "מסלול חוג זרנשטי — קורמטורה" }, meta: { en: "11km loop, ~600m gain, 5–6 hrs", he: "מסלול מעגלי 11 ק\"מ, עלייה כ-600 מ', 5–6 שעות" }, desc: { en: "A full-day mountain hike for the fittest subset of the group, building on the easy gorge walk.", he: "טיול הרים ליום שלם לחלק הכשיר ביותר בקבוצה, בהמשך להליכה הקלה בקניון." } }
         ]
       },
       restaurants: [
@@ -923,7 +952,8 @@
         { name: { en: "Bran Castle", he: "טירת בראן" }, meta: { en: "~30–40 min", he: "כ-30–40 דק'" }, desc: { en: "\"Dracula's Castle\" — best for older kids/teens (lots of stairs); the courtyard market is fun for everyone.", he: "\"טירת דרקולה\" — הכי מתאים לילדים גדולים ובני נוער (הרבה מדרגות); שוק החצר כיפי לכולם." }, link: "https://he.wikipedia.org/wiki/טירת_בראן" },
         { name: { en: "Old Town & Rope Street", he: "העיר העתיקה ורחוב החבל" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "Council Square, the Black Church, and one of Europe's narrowest streets — a great low-key evening.", he: "כיכר העיר, הכנסייה השחורה, ואחד הרחובות הצרים באירופה — ערב נעים ורגוע." }, link: "https://he.wikipedia.org/wiki/בראשוב" },
         { name: { en: "Aquatic Paradise / Smile Aqua Park", he: "פאראדיסול אקווטיק / סמייל אקווה פארק" }, meta: { en: "In Brașov", he: "בבראשוב" }, desc: { en: "Two water park options, slides for every intensity level, wellness area for grandparents.", he: "שני פארקי מים, מגלשות בכל רמת עוצמה, אזור ספא לסבים וסבתות." }, link: "https://www.paradisulacvatic.ro" },
-        { name: { en: "Adventure Park Brașov + Zoo", he: "פארק ההרפתקאות ובראשוב + גן החיות" }, meta: { en: "~10–15 min", he: "כ-10–15 דק'" }, desc: { en: "16 rope trails from age 4 up, plus a small zoo right next door.", he: "16 מסלולי חבלים מגיל 4, ולידם גן חיות קטן." }, link: "https://www.parc-aventura.ro/en" }
+        { name: { en: "Adventure Park Brașov + Zoo", he: "פארק ההרפתקאות ובראשוב + גן החיות" }, meta: { en: "~10–15 min", he: "כ-10–15 דק'" }, desc: { en: "16 rope trails from age 4 up, plus a small zoo right next door.", he: "16 מסלולי חבלים מגיל 4, ולידם גן חיות קטן." }, link: "https://www.parc-aventura.ro/en" },
+        { name: { en: "Go-karting", he: "קארטינג" }, meta: { en: "In Brașov · kids' karts available", he: "בבראשוב · יש גם קארטים לילדים" }, desc: { en: "Two track lengths and karts for kids under 12 — good for a rainy afternoon.", he: "שני אורכי מסלול וקארטים לילדים מתחת לגיל 12 — טוב לאחר צהריים גשום." } }
       ]
     },
     {
@@ -942,10 +972,12 @@
           { name: { en: "Zărnești Gorges", he: "קניוני זרנשטי" }, meta: { en: "~2 hrs round trip · ~20–25 min drive", he: "כ-2 שעות הלוך ושוב · כ-20–25 דק' נסיעה" }, desc: { en: "A dramatic narrow gorge on a flat, stroller-manageable path.", he: "קניון צר ומרשים על שביל שטוח, נוח לעגלות." }, link: "https://www.tripadvisor.com/Attraction_Review-g1913628-d12691076-Reviews-Prapastiile_Zarnestiului-Zarnesti_Brasov_County_Central_Romania_Transylvania.html" }
         ],
         medium: [
-          { name: { en: "Seven Ladders Canyon", he: "קניון שבע הסולמות" }, meta: { en: "~2.5–3.5 hrs · ~25–30 min drive", he: "כ-2.5–3.5 שעות · כ-25–30 דק' נסיעה" }, desc: { en: "Metal ladders on wet rock — needs comfort with heights, fine for teens and adults.", he: "סולמות מתכת על סלע רטוב — דורש נוחות עם גובה, מתאים לבני נוער ומבוגרים." }, link: "https://www.alltrails.com/trail/romania/brasov/canionul-7-scari" }
+          { name: { en: "Seven Ladders Canyon", he: "קניון שבע הסולמות" }, meta: { en: "~2.5–3.5 hrs · ~25–30 min drive", he: "כ-2.5–3.5 שעות · כ-25–30 דק' נסיעה" }, desc: { en: "Metal ladders on wet rock — needs comfort with heights, fine for teens and adults.", he: "סולמות מתכת על סלע רטוב — דורש נוחות עם גובה, מתאים לבני נוער ומבוגרים." }, link: "https://www.alltrails.com/trail/romania/brasov/canionul-7-scari" },
+          { name: { en: "Cabana Piatra Mare (family route)", he: "קבינת פייטרה מארה (מסלול משפחתי)" }, meta: { en: "~3 hrs one way · ~25–30 min to trailhead", he: "כ-3 שעות לכיוון אחד · כ-25–30 דק' לתחילת מסלול" }, desc: { en: "A steady, non-technical route up Piatra Mare — the easier alternative to the ladder route.", he: "מסלול עולה קבוע ולא טכני להר פייטרה מארה — האלטרנטיבה הקלה יותר למסלול הסולמות." } }
         ],
         hard: [
-          { name: { en: "Piatra Craiului Ridge", he: "רכס פייטרה קריולוי" }, meta: { en: "Full day to 2 days · ~30–40 min to trailhead", he: "יום שלם עד יומיים · כ-30–40 דק' לתחילת מסלול" }, desc: { en: "The signature big hike of the region — a 25km blade of limestone ridge.", he: "טיול הדגל של האזור — רכס גיר מרשים באורך 25 ק\"מ." }, link: "https://www.alltrails.com/explore/recording/creasta-piatra-craiului--2" }
+          { name: { en: "Piatra Craiului Ridge", he: "רכס פייטרה קריולוי" }, meta: { en: "Full day to 2 days · ~30–40 min to trailhead", he: "יום שלם עד יומיים · כ-30–40 דק' לתחילת מסלול" }, desc: { en: "The signature big hike of the region — a 25km blade of limestone ridge.", he: "טיול הדגל של האזור — רכס גיר מרשים באורך 25 ק\"מ." }, link: "https://www.alltrails.com/explore/recording/creasta-piatra-craiului--2" },
+          { name: { en: "La Om Peak (2,238m)", he: "פסגת לה אום (2,238 מ')" }, meta: { en: "Full day · steep, sustained terrain", he: "יום שלם · שטח תלול ומתמשך" }, desc: { en: "Piatra Craiului's highest point — a strenuous full-day summit push, not technical climbing but sustained and steep.", he: "הפסגה הגבוהה בפייטרה קריולוי — עלייה מאומצת ליום שלם, לא טיפוס טכני אבל תלול ומתמשך." } }
         ]
       },
       restaurants: [
@@ -955,7 +987,9 @@
       ],
       activities: [
         { name: { en: "Dino Parc Râșnov", he: "דינו פארק רישנוב" }, meta: { en: "In town", he: "בעיר" }, desc: { en: "125 animatronic dinosaurs, trails, laser maze — great toddler-to-teen appeal.", he: "125 דינוזאורים אנימטרוניים, מסלולים, מבוך לייזר — מתאים מפעוטות עד בני נוער." }, link: "https://dinoparc.ro/en/" },
-        { name: { en: "Libearty Bear Sanctuary", he: "מקלט הדובים ליברטי" }, meta: { en: "Zărnești, ~15–20 min", he: "זרנשטי, כ-15–20 דק'" }, desc: { en: "Europe's largest brown bear sanctuary — a guided 1-hour walking tour, reserve ahead.", he: "מקלט הדובים החומים הגדול באירופה — סיור מודרך של שעה, להזמין מראש." }, link: "https://millionsoffriends.org/en/libearty/" }
+        { name: { en: "Libearty Bear Sanctuary", he: "מקלט הדובים ליברטי" }, meta: { en: "Zărnești, ~15–20 min", he: "זרנשטי, כ-15–20 דק'" }, desc: { en: "Europe's largest brown bear sanctuary — a guided 1-hour walking tour, reserve ahead.", he: "מקלט הדובים החומים הגדול באירופה — סיור מודרך של שעה, להזמין מראש." }, link: "https://millionsoffriends.org/en/libearty/" },
+        { name: { en: "Poiana Brașov Alpine Coaster", he: "מסלול אלפיין קוסטר בפויאנה בראשוב" }, meta: { en: "~15–20 min · new for 2026", he: "כ-15–20 דק' · חדש ל-2026" }, desc: { en: "A summer toboggan track — a big hit for kids and teens, combine with the cable car ride.", he: "מסלול מזחלות קיץ — להיט אצל ילדים ובני נוער, לשלב עם רכיבת הרכבל." } },
+        { name: { en: "Aquatic Paradise / Smile Aqua Park", he: "פאראדיסול אקווטיק / סמייל אקווה פארק" }, meta: { en: "~20–25 min, Brașov", he: "כ-20–25 דק', בראשוב" }, desc: { en: "Two water park options if the group wants a pool day instead of another hike.", he: "שני פארקי מים אם הקבוצה רוצה יום בריכה במקום עוד טיול." } }
       ],
       flags: [ { en: "Râșnov Citadel's interior has been under restoration since 2020 (expected ~2027) — only the garden and Báthory Tower are open, not the full fortress.", he: "פנים מבצר רישנוב בשיפוצים מאז 2020 (משוער סיום ~2027) — פתוחים רק הגן ומגדל בטורי, לא המבצר המלא." } ]
     },
@@ -979,7 +1013,9 @@
         { name: { en: "Herăstrău Park + Miramagica", he: "פארק הרסטראו + מירמג'יקה" }, meta: { en: "Flat, stroller-friendly", he: "שטוח, נוח לעגלות" }, desc: { en: "A huge lakeside park with a mini amusement park inside — the tallest Ferris wheel in Romania.", he: "פארק ענק ליד אגם עם פארק שעשועים מיני בתוכו — הגלגל הענק הגבוה ברומניה." }, link: "https://he.wikipedia.org/wiki/פארק_הרסטראו" },
         { name: { en: "Village Museum", he: "מוזיאון הכפר" }, meta: { en: "Next to Herăstrău", he: "ליד הרסטראו" }, desc: { en: "300+ real Romanian farmhouses — flat outdoor walking, craft workshops for kids.", he: "יותר מ-300 בתי כפר רומניים אמיתיים — הליכה שטוחה בחוץ, סדנאות מלאכת יד לילדים." }, link: "https://muzeul-satului.ro/en/" },
         { name: { en: "Antipa Natural History Museum", he: "מוזיאון אנטיפא להיסטוריה של הטבע" }, meta: { en: "Indoor, good for a hot day", he: "בפנים, טוב ליום חם" }, desc: { en: "Fully interactive exhibits — a strong option across the whole toddler-to-grandparent range.", he: "תערוכות אינטראקטיביות לגמרי — אופציה טובה לכל הטווח, מפעוטות עד סבים וסבתות." }, link: "https://www.antipa.ro/" },
-        { name: { en: "Old Town + Cișmigiu Gardens", he: "העיר העתיקה וגני צ'ישמיג'יו" }, meta: { en: "Walkable", he: "ניתן להליכה" }, desc: { en: "Cobblestone sightseeing plus a shaded park with a playground and boat rides — good final-day pace.", he: "סיור באבני ריצוף ופארק מוצל עם מתקן משחקים וסירות — קצב נעים ליום האחרון." }, link: "https://he.wikipedia.org/wiki/גן_צ'ישמיג'יו" }
+        { name: { en: "Old Town + Cișmigiu Gardens", he: "העיר העתיקה וגני צ'ישמיג'יו" }, meta: { en: "Walkable", he: "ניתן להליכה" }, desc: { en: "Cobblestone sightseeing plus a shaded park with a playground and boat rides — good final-day pace.", he: "סיור באבני ריצוף ופארק מוצל עם מתקן משחקים וסירות — קצב נעים ליום האחרון." }, link: "https://he.wikipedia.org/wiki/גן_צ'ישמיג'יו" },
+        { name: { en: "Bucharest Zoo (Băneasa)", he: "גן החיות בוקרשט (בנאסה)" }, meta: { en: "Closed Mondays", he: "סגור בימי שני" }, desc: { en: "Small and manageable — won't wear anyone out on the last day. Free entry for under-3s.", he: "קטן ונוח — לא מתיש אף אחד ביום האחרון. כניסה חינם לילדים מתחת לגיל 3." } },
+        { name: { en: "Therme București", he: "תרמה בוקרשט" }, meta: { en: "~5–10 min from the airport", he: "כ-5–10 דק' משדה התעופה" }, desc: { en: "Europe's largest wellness/water park complex — 10 pools, 16 slides, a wellness side for grandparents. A full \"everyone relaxes together\" day.", he: "מתחם הספא ופארק המים הגדול באירופה — 10 בריכות, 16 מגלשות, וצד ספא לסבים וסבתות. יום שלם של \"כולם נרגעים ביחד\"." } }
       ]
     }
   ];
@@ -1061,7 +1097,8 @@
     { id: "home", labelKey: "navHome" },
     { id: "map", labelKey: "navMap" },
     { id: "flights", labelKey: "navFlights" },
-    { id: "packing", labelKey: "navPacking" }
+    { id: "packing", labelKey: "navPacking" },
+    { id: "saved", labelKey: "navSaved" }
   ];
 
   var stopColors = ["#5B6B78", "#3F7856", "#2E7A74", "#B08628", "#A0502D", "#6B2F44", "#4A5A8C"];
@@ -1217,10 +1254,43 @@
       : tf(item.name);
   }
 
-  function diffList(items, diffKey, diffClass) {
+  var savableItems = [];
+
+  function slug(s) {
+    return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  }
+
+  function recoNameHtml(item, stopIdx, category) {
+    var key = "yr_save_" + stopIdx + "_" + category + "_" + slug(item.name.en);
+    savableItems.push({ key: key, stopIdx: stopIdx, item: item });
+    var saved = localStorage.getItem(key) === "1";
+    var star = '<button class="save-star' + (saved ? " saved" : "") + '" data-key="' + key + '" aria-label="save" type="button">' + (saved ? "★" : "☆") + "</button>";
+    return star + nameHtml(item);
+  }
+
+  function wireSaveStars(container) {
+    container.querySelectorAll(".save-star").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var key = btn.dataset.key;
+        if (localStorage.getItem(key) === "1") {
+          localStorage.removeItem(key);
+          btn.classList.remove("saved");
+          btn.textContent = "☆";
+        } else {
+          localStorage.setItem(key, "1");
+          btn.classList.add("saved");
+          btn.textContent = "★";
+        }
+        renderSavedList();
+      });
+    });
+  }
+
+  function diffList(items, diffKey, diffClass, stopIdx) {
     if (!items || !items.length) return "";
     var rows = items.map(function (h) {
-      return '<div class="reco"><div class="name"><span class="pill ' + diffClass + '">' + t(diffKey) + '</span>' + nameHtml(h) + '</div>' +
+      return '<div class="reco"><div class="name"><span class="pill ' + diffClass + '">' + t(diffKey) + '</span>' + recoNameHtml(h, stopIdx, "hike") + '</div>' +
         '<div class="meta">' + tf(h.meta) + '</div><div class="desc">' + tf(h.desc) + "</div></div>";
     }).join("");
     return '<div class="diff-group">' + rows + "</div>";
@@ -1229,6 +1299,7 @@
   function renderStops() {
     var wrap = document.getElementById("stopsList");
     wrap.innerHTML = "";
+    savableItems = [];
     stops.forEach(function (s, idx) {
       var stopEl = document.createElement("div");
       stopEl.className = "stop";
@@ -1263,20 +1334,20 @@
       var hikesPanel = "";
       if (s.hikes !== null) {
         hikesPanel = '<div class="subpanel active" data-panel="hikes">' +
-          diffList(s.hikes.easy, "diffEasy", "easy") +
-          diffList(s.hikes.medium, "diffMedium", "medium") +
-          diffList(s.hikes.hard, "diffHard", "hard") +
+          diffList(s.hikes.easy, "diffEasy", "easy", idx) +
+          diffList(s.hikes.medium, "diffMedium", "medium", idx) +
+          diffList(s.hikes.hard, "diffHard", "hard", idx) +
           "</div>";
       }
 
       var restPanel = '<div class="subpanel' + (s.hikes === null ? " active" : "") + '" data-panel="restaurants">' +
         s.restaurants.map(function (r) {
-          return '<div class="reco"><div class="name">' + nameHtml(r) + '</div><div class="meta">' + tf(r.meta) + '</div><div class="desc">' + tf(r.desc) + "</div></div>";
+          return '<div class="reco"><div class="name">' + recoNameHtml(r, idx, "restaurant") + '</div><div class="meta">' + tf(r.meta) + '</div><div class="desc">' + tf(r.desc) + "</div></div>";
         }).join("") + "</div>";
 
       var actPanel = '<div class="subpanel" data-panel="activities">' +
         (s.activities.length ? s.activities.map(function (a) {
-          return '<div class="reco"><div class="name">' + nameHtml(a) + '</div><div class="meta">' + tf(a.meta) + '</div><div class="desc">' + tf(a.desc) + "</div></div>";
+          return '<div class="reco"><div class="name">' + recoNameHtml(a, idx, "activity") + '</div><div class="meta">' + tf(a.meta) + '</div><div class="desc">' + tf(a.desc) + "</div></div>";
         }).join("") : '<p class="desc" style="padding:10px 0;">' + t("noHikesNote") + "</p>") + "</div>";
 
       var propHtml = s.bookingLink
@@ -1307,6 +1378,8 @@
 
       var propLinkEl = stopEl.querySelector(".prop-link");
       if (propLinkEl) propLinkEl.addEventListener("click", function (e) { e.stopPropagation(); });
+
+      wireSaveStars(stopEl);
 
       stopEl.querySelectorAll(".subtab").forEach(function (btn) {
         btn.addEventListener("click", function (e) {
@@ -1413,6 +1486,29 @@
     });
   }
 
+  function renderSavedList() {
+    var container = document.getElementById("savedList");
+    if (!container) return;
+    var saved = savableItems.filter(function (si) { return localStorage.getItem(si.key) === "1"; });
+    if (!saved.length) {
+      container.innerHTML = '<p class="lede">' + t("savedEmpty") + "</p>";
+      return;
+    }
+    var byStop = {};
+    saved.forEach(function (si) {
+      (byStop[si.stopIdx] = byStop[si.stopIdx] || []).push(si);
+    });
+    var html = "";
+    Object.keys(byStop).sort(function (a, b) { return a - b; }).forEach(function (stopIdxStr) {
+      var stopIdx = parseInt(stopIdxStr, 10);
+      html += '<div class="fam-group"><h3>' + tf(stops[stopIdx].short) + "</h3>" +
+        byStop[stopIdxStr].map(function (si) {
+          return '<div class="reco"><div class="name">' + nameHtml(si.item) + '</div><div class="meta">' + tf(si.item.meta) + "</div></div>";
+        }).join("") + "</div>";
+    });
+    container.innerHTML = html;
+  }
+
   function renderAll() {
     renderStaticText();
     renderTabs();
@@ -1423,6 +1519,7 @@
     renderPackSelect();
     renderRouteMap();
     renderNear();
+    renderSavedList();
   }
 
   document.getElementById("langToggle").addEventListener("click", function () {
