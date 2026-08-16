@@ -376,6 +376,24 @@
   .drive-meta { display: flex; gap: 14px; margin: 6px 0; font-size: 0.84rem; color: var(--ink-soft); flex-wrap: wrap; }
   .drive-meta b { color: var(--ink); font-variant-numeric: tabular-nums; }
   .drive-note { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 8px; }
+  .drive-stop {
+    background: var(--forest-soft);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .drive-stop .stop-label {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--forest);
+    margin-bottom: 3px;
+  }
+  [dir="rtl"] .drive-stop .stop-label { letter-spacing: 0; }
 
   .flag-box {
     background: var(--rust-soft);
@@ -710,6 +728,7 @@
     drivesLede: { en: "Every day you pack up and move to the next stop.", he: "כל יום שבו אורזים ועוברים לתחנה הבאה." },
     driveKm: { en: "km", he: "ק\"מ" },
     driveOpenMaps: { en: "Directions ↗", he: "ניווט ↖" },
+    driveStopLabel: { en: "🛑 Suggested stop along the way", he: "🛑 עצירה מומלצת בדרך" },
     savedEyebrow: { en: "Just for you", he: "רק בשבילכם" },
     savedTitle: { en: "Your saved places", he: "המקומות השמורים שלכם" },
     savedLede: { en: "Only on this device — tap the ☆ on any hike, restaurant, or activity to add it here.", he: "רק במכשיר הזה — לחצו על ה-☆ ליד כל טיול, מסעדה או פעילות כדי להוסיף אותם לכאן." },
@@ -1529,7 +1548,9 @@
     if (!container) return;
     container.innerHTML = drives.map(function (d) {
       var fromStop = stops[d.from], toStop = stops[d.to];
-      var noteHtml = tf(d.note) ? '<p class="drive-note">' + tf(d.note) + "</p>" : "";
+      var noteHtml = tf(d.note)
+        ? '<div class="drive-stop"><span class="stop-label">' + t("driveStopLabel") + '</span>' + tf(d.note) + "</div>"
+        : "";
       return '<div class="drive-card">' +
         '<div class="drive-head"><span class="drive-route">' + tf(fromStop.short) + " → " + tf(toStop.short) + "</span>" +
         '<span class="drive-date num">' + d.date + "</span></div>" +
